@@ -1,3 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900&display=swap');
+
 body {
-	font-family: 'Arial', 'Helvetica', sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: 'Nunito', 'Helvetica', sans-serif;
+}
+
+:root {
+  --text-main: #1a1a1a;
+  --text-secondary: #7b8e97;
+  --text-white: #ffffff;
+  --primary: #ffe44d;
+  --primary-dark: #ffaa0d;
+  --primary-light: #fff5c0;
+  --font-family: 'Nunito', 'Helvetica', sans-serif;
 }
