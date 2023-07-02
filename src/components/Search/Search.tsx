@@ -1,34 +1,31 @@
-import { useState, FormEvent, HTMLAttributes, DetailedHTMLProps } from 'react';
+import { useState, FormEvent, HTMLAttributes, DetailedHTMLProps, useContext } from 'react';
 import cn from 'classnames';
 import styles from './search.module.css';
 import { ReactComponent as CloseIcon } from './ic-close-input.svg';
 import { Button, Input } from '../../atoms';
+import FilterContext from '../../context/FilterContext';
 
 type SearchProps = DetailedHTMLProps<HTMLAttributes<HTMLFormElement>, HTMLFormElement>;
 
 const Search = ({ className, ...props }: SearchProps): JSX.Element => {
-  const [search, setSearch] = useState<string>('');
-
-  const goToSearch = () => {
-    console.log(search);
-  };
+  const { setFilter } = useContext(FilterContext);
+  const [text, setText] = useState('');
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    goToSearch();
+    setFilter(text);
+    setText('');
   };
 
-  const clearHandler = () => setSearch('');
+  const clearHandler = () => {
+    setText('');
+    setFilter('');
+  };
 
   return (
-    <form className={cn(className, styles.search)} {...props} role='search' onSubmit={submitHandler}>
-      <Input
-        className={styles.input}
-        placeholder='Поиск...'
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
-      <Button className={styles.button} variant='primary' aria-label='Искать по сайту' onClick={clearHandler}>
+    <form className={cn(className, styles.search)} {...props} onSubmit={submitHandler}>
+      <Input className={styles.input} placeholder='Поиск...' value={text} onChange={(e) => setText(e.target.value)} />
+      <Button className={styles.button} variant='primary' onClick={clearHandler} type='reset'>
         <CloseIcon />
       </Button>
     </form>

@@ -5,6 +5,13 @@ export const Container = styled.div`
   margin: auto;
 `;
 
+export const CardsWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`;
+
 export const Btn = styled.button`
   padding: 10px 20px;
   border: 1px solid #000;

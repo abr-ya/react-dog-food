@@ -1,5 +1,6 @@
 import Food from './Food';
 import Home from './Home';
-import Search from './Search';
+import NotFound from './NotFound';
+import SearchPage from './SearchPage';
 
-export { Food, Home, Search };
+export { Food, Home, NotFound, SearchPage };
