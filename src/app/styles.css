@@ -6,10 +6,15 @@ body {
   font-family: 'Nunito', 'Helvetica', sans-serif;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 :root {
   --text-main: #1a1a1a;
   --text-secondary: #7b8e97;
   --text-white: #ffffff;
+  --text-outline: #cfd8dc;
   --primary: #ffe44d;
   --primary-dark: #ffaa0d;
   --primary-light: #fff5c0;
