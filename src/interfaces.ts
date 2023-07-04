@@ -1,4 +1,5 @@
 export interface IProduct {
+  _id: string;
   name: string;
   price: number;
   discount: number;
@@ -8,5 +9,5 @@ export interface IProduct {
   isCart: boolean;
   available: boolean;
   stock: number;
-  picture: string;
+  pictures: string;
 }

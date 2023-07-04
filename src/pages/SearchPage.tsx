@@ -4,6 +4,7 @@ import { IProduct } from '../interfaces';
 import FilterContext from '../context/FilterContext';
 import { Card } from '../components';
 import { CardsWrapper } from '../components/Common.styled';
+import { createConfig } from '../utls';
 
 const SearchPage = () => {
   const { key } = useContext(FilterContext);
@@ -12,12 +13,18 @@ const SearchPage = () => {
   const [filteredData, setFilteredData] = useState<IProduct[]>([]);
 
   useEffect(() => {
-    const apiUrl =
-      'https://file.notion.so/f/s/42dd248d-d945-4741-a6b5-842b764e855c/data.json?id=24fe6e14-d381-422e-b708-2d318dec345b&table=block&spaceId=05a92a5a-0287-4665-b482-76386649fce0&expirationTimestamp=1688313600000&signature=rLdu3Ure2ENTYRMxQnbXaG9jz2X8JamOeb6gz-ByYdw';
+    const apiUrl = 'https://api.react-learning.ru/products';
     const cancelTokenSource = axios.CancelToken.source();
+    const token =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGE0M2I5ZGUwYmYyYzUxOWIxNzZhZGYiLCJncm91cCI6Imdyb3VwMTExIiwiaWF0IjoxNjg4NDg0ODY4LCJleHAiOjE3MjAwMjA4Njh9.Z4he7gfXTfSLpZpatx7c5h4a46ifkDoopraZyqhNDu4';
+    const config = createConfig(token);
+
     axios
-      .get(apiUrl, { cancelToken: cancelTokenSource.token })
-      .then((res) => setData(res.data))
+      .get(apiUrl, { ...config, cancelToken: cancelTokenSource.token })
+      .then((res) => {
+        console.log(res.data.products);
+        setData(res.data.products);
+      })
       .catch((e) => {
         if (isCancel(e)) {
           console.log('Request canceled, error message: ', e.message);
@@ -40,11 +47,10 @@ const SearchPage = () => {
 
   return (
     <>
-      <h1>React Typescript Webpack</h1>
-      <h2>{`Получено ${data.length} товаров, фильтруем по: "${key}"`}</h2>
+      <h1>{`По запросу ${key} найдено ${filteredData.length} товаров`}</h1>
       <CardsWrapper>
         {filteredData.map((el) => (
-          <Card key={el.picture} {...el} />
+          <Card key={el._id} {...el} />
         ))}
       </CardsWrapper>
     </>

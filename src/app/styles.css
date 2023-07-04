@@ -22,5 +22,6 @@ p {
   --primary: #ffe44d;
   --primary-dark: #ffaa0d;
   --primary-light: #fff5c0;
+  --red: #f44336;
   --font-family: 'Nunito', 'Helvetica', sans-serif;
 }
