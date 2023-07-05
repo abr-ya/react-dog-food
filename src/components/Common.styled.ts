@@ -38,7 +38,7 @@ export const Btn = styled.button`
 `;
 
 //styleName: Header : H3/ExtraBold;
-export const H3ExtraBold = styled.h3<{ isRed?: boolean }>`
+export const H3ExtraBold = styled.h3<{ isred?: boolean }>`
   font-size: 20px;
   font-weight: 800;
   line-height: 24px;
@@ -47,11 +47,31 @@ export const H3ExtraBold = styled.h3<{ isRed?: boolean }>`
   text-align: left;
   margin: 0;
 
-  ${({ isRed }) =>
-    isRed &&
+  ${({ isred }) =>
+    isred &&
     css`
       color: var(--red);
     `}
+`;
+
+//styleName: Body : P1;
+export const BodyP1 = styled.span<{ weight?: number }>`
+  font-family: Nunito;
+  font-size: 16px;
+  font-weight: ${({ weight = 400 }) => weight};
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: left;
+`;
+
+//styleName: Body : S1 SemiBold = 600;
+export const BodyS1 = styled.span<{ weight?: number }>`
+  font-family: Nunito;
+  font-size: 12px;
+  font-weight: ${({ weight = 400 }) => weight};
+  line-height: 14px;
+  letter-spacing: 0em;
+  text-align: left;
 `;
 
 //styleName: Body : S1/Regular;

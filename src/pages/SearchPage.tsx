@@ -49,7 +49,7 @@ const SearchPage = () => {
     <>
       <h1>{`По запросу ${key} найдено ${filteredData.length} товаров`}</h1>
       <CardsWrapper>
-        {filteredData.map((el) => (
+        {filteredData.slice(0, 8).map((el) => (
           <Card key={el._id} {...el} />
         ))}
       </CardsWrapper>

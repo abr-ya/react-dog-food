@@ -21,4 +21,5 @@ export const Center = styled.div`
 export const Right = styled.div`
   display: flex;
   width: 140px;
+  gap: 30px;
 `;
