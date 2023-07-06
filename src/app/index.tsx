@@ -9,10 +9,10 @@ export const App = () => {
     <FilterProvider>
       <Routes>
         <Route path='/' element={<MainLayout />}>
+          <Route index element={<SearchPage />} />
           <Route path='home' element={<Home />} />
-          <Route path='food' element={<Food />} />
+          <Route path='product' element={<Food />} />
           <Route path='product/:id' element={<Product />} />
-          <Route path='/' element={<SearchPage />} />
           <Route path='*' element={<NotFound />} />
         </Route>
       </Routes>

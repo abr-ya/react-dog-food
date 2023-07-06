@@ -1,20 +1,20 @@
 const HTMLWebpackPlugins = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const path = require('path'); //для того чтобы превратить отнсительный путь в абсолютный мы будем использовать пакет path
+const path = require('path');
+const { resolve } = require('path');
 const webpack = require('webpack');
 
 const production = process.env.NODE_ENV === 'production';
 
 module.exports = {
 	entry: path.resolve(__dirname, '..', './src/index.tsx'), //точка входа в наше приложение содержит абсолютный путь к index.ts
-	output: {
-		path: path.resolve(__dirname, '..', './dist'), //путь куда будет собираться наш проект
-		filename: production
-			? 'static/scripts/[name].[contenthash].js'
-			: 'static/scripts/[name].js', // имя нашего бандла
-	},
-	//Нужно помочь вебпаку научится работать с jsx и tsx файлами для этого используют ts loader
+	// output: {
+	// 	path: path.resolve(__dirname, '..', './dist'), //путь куда будет собираться наш проект
+	// 	filename: production
+	// 		? 'static/scripts/[name].[contenthash].js'
+	// 		: 'bundle.js', // имя нашего бандла
+	// },
 	module: {
 		rules: [
 			{
@@ -68,8 +68,10 @@ module.exports = {
 		],
 	},
 	resolve: {
-		extensions: ['.js', '.jsx', '.tsx', '.ts', '.json'], //указываем файлы с которыми будет работать webpack
+		extensions: ['.js', '.jsx', '.tsx', '.ts', '.json'],
+		modules: [resolve(__dirname, "../src"), "node_modules"],
 	},
+	context: resolve(__dirname, "../src"),
 	plugins: [
 		new HTMLWebpackPlugins({
 			template: path.resolve(__dirname, '..', './public/index.html'),
