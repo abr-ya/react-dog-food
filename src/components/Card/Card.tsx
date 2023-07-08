@@ -19,7 +19,7 @@ const Card: FC<ICard> = ({ discount, name, pictures, price, stock, _id: id }) =>
       <TextWrapper>
         {/* isSale && but height */}
         <OldPrice>{isSale ? `${price} ₽` : ''}</OldPrice>
-        <H3ExtraBold isred={isSale}>{realPrice} ₽</H3ExtraBold>
+        <H3ExtraBold $isred={isSale}>{realPrice} ₽</H3ExtraBold>
         <BodyS3>{stock} шт</BodyS3>
         <NavLink to={`/product/${id}`}>{name}</NavLink>
       </TextWrapper>

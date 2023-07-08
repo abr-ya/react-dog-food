@@ -5,7 +5,7 @@ import { Search } from '../components';
 import { Center, Left, Right, Wrapper } from './Header.styled';
 import { CartIcon, LikeIcon, DogIcon } from '../components/icons';
 
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 type HeaderProps = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
@@ -15,20 +15,24 @@ const Header = ({ className, ...props }: HeaderProps): JSX.Element => {
       <Container>
         <Wrapper>
           <Left>
-            <LogoIcon />
+            <Link to='/'>
+              <LogoIcon />
+            </Link>
           </Left>
           <Center>
             <Search />
           </Center>
           <Right>
             <LikeIcon />
-            <CartIcon />
-            <DogIcon />
+            <Link to='/cart'>
+              <CartIcon />
+            </Link>
+            <Link to='/user'>
+              <DogIcon />
+            </Link>
           </Right>
         </Wrapper>
       </Container>
-      {/* <Link to='/'>Home</Link>
-      <Link to='/food'>Food</Link> */}
     </header>
   );
 };
