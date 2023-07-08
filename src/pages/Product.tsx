@@ -7,7 +7,7 @@ const Product = () => {
     <>
       <div>Product {id}</div>
       <div>
-        <Link to='/'>Назад к поиску</Link>
+        <Link to='/search'>Назад к поиску</Link>
       </div>
     </>
   );

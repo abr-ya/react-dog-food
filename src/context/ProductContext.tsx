@@ -28,8 +28,8 @@ const ProductContext = createContext<ProductContextType>(initialContext);
 
 interface IProductManagerResult {
   data: IProduct[];
-  setProduct: (products: IProduct[]) => void;
-  resetProduct: () => void;
+  setProducts: (products: IProduct[]) => void;
+  resetProducts: () => void;
 }
 
 const ProductManager = (): IProductManagerResult => {

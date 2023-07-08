@@ -18,7 +18,7 @@ const createOptions = (token: string) => ({
 });
 
 export const getProductsReguest = async (token: string) => {
-  const { data, status } = await axios.get(`${baseUrl}users`, createOptions(token));
+  const { data, status } = await axios.get(`${baseUrl}products`, createOptions(token));
 
   return { data, status };
 };
