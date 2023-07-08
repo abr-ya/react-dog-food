@@ -1,20 +1,20 @@
+import { Routes, Route } from 'react-router-dom';
 import './styles.css';
-import s from './app.module.css';
-import reactImage from './images/react.png';
-import { ReactComponent as LogoIcon } from './images/logo.svg';
-import { useState } from 'react';
+import MainLayout from '../layout/MainLayout';
+import { Food, Home, NotFound, SearchPage } from '../pages';
+import { FilterProvider } from '../context/FilterContext';
 
 export const App = () => {
-	// const num = 0
-	const [count, setCount] = useState(0);
-	return (
-		<>
-			<LogoIcon className={s.root__icon} />
-			<img className={s.root__image} src={reactImage} alt='test' />
-			<h1 className={s.root}>React Typescript Webpack</h1>
-			<button className='test' onClick={() => setCount((c) => c + 1)}>
-				Count- {count}
-			</button>
-		</>
-	);
+  return (
+    <FilterProvider>
+      <Routes>
+        <Route path='/' element={<MainLayout />}>
+          <Route path='home' element={<Home />} />
+          <Route path='food' element={<Food />} />
+          <Route path='/' element={<SearchPage />} />
+          <Route path='*' element={<NotFound />} />
+        </Route>
+      </Routes>
+    </FilterProvider>
+  );
 };
