@@ -24,7 +24,7 @@ const Header = ({ className, ...props }: HeaderProps): JSX.Element => {
           </Center>
           <Right>
             <LikeIcon />
-            <Link to='/cart'>
+            <Link to='/search'>
               <CartIcon />
             </Link>
             <Link to='/user'>
