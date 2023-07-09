@@ -47,6 +47,16 @@ export const H1ExtraBold = styled.h1`
   text-align: left;
 `;
 
+//styleName: Header : H2/ExtraBold;
+export const H2ExtraBold = styled.h2`
+  font-family: Nunito;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 28px;
+  letter-spacing: 0em;
+  text-align: left;
+`;
+
 //styleName: Header : H3/ExtraBold;
 export const H3ExtraBold = styled.h3<{ $isred?: boolean }>`
   font-size: 20px;
@@ -65,13 +75,39 @@ export const H3ExtraBold = styled.h3<{ $isred?: boolean }>`
 `;
 
 //styleName: Body : P1;
-export const BodyP1 = styled.span<{ $weight?: number }>`
+export const BodyP1 = styled.p<{ $weight?: number }>`
   font-family: Nunito;
   font-size: 16px;
   font-weight: ${({ $weight = 400 }) => $weight};
   line-height: 20px;
   letter-spacing: 0em;
   text-align: left;
+`;
+
+//styleName: Body : P2;
+export const BodyP2 = styled.p<{ $color?: 'primary' | 'dark' | 'light'; $weight?: number }>`
+  font-family: Nunito;
+  font-size: 14px;
+  font-weight: ${({ $weight = 400 }) => $weight};
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: left;
+
+  ${({ $color }) =>
+    $color === 'primary' &&
+    css`
+      color: var(--primary);
+    `}
+  ${({ $color }) =>
+    $color === 'dark' &&
+    css`
+      color: var(--primary-dark);
+    `}
+  ${({ $color }) =>
+    $color === 'light' &&
+    css`
+      color: var(--primary-light);
+    `}
 `;
 
 //styleName: Body : S1 SemiBold = 600;
