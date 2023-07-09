@@ -3,7 +3,6 @@ import './styles.css';
 import MainLayout from '../layout/MainLayout';
 import { Food, Home, Error404, Product, SearchPage, User } from '../pages';
 import { FilterProvider } from '../context/FilterContext';
-import { ProductProvider } from '../context/ProductContext';
 import PrivateRoute from '../layout/PrivateRoute';
 
 const router = createBrowserRouter(
@@ -24,9 +23,7 @@ const router = createBrowserRouter(
 export const App = () => {
   return (
     <FilterProvider>
-      <ProductProvider>
-        <RouterProvider router={router} />
-      </ProductProvider>
+      <RouterProvider router={router} />
     </FilterProvider>
   );
 };
