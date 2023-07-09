@@ -17,8 +17,8 @@ export const Btn = styled.button`
   align-items: center;
   justify-content: center;
   padding: 10px 18px;
-  border: 1px solid var(--primary);
   border-radius: 55px;
+  border: 1px solid var(--primary);
   background: var(--primary);
   color: var(--text-main);
   font-size: 16px;
@@ -35,6 +35,12 @@ export const Btn = styled.button`
     background: gray;
     cursor: not-allowed;
   }
+`;
+
+export const BtnGhost = styled(Btn)`
+  border: 1px solid var(--text-outline);
+  background: var(--white);
+  color: var(--text-main);
 `;
 
 //styleName: Header : H1/ExtraBold;

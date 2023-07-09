@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { IProduct } from '../interfaces';
 import FilterContext from '../context/FilterContext';
-import { Card } from '../components';
+import { Card, NotFound } from '../components';
 import { CardsWrapper } from '../components/Common.styled';
 import ProductContext from '../context/ProductContext';
 import UserContext from '../context/UserContext';
@@ -34,11 +34,15 @@ const SearchPage = () => {
   return (
     <>
       <h1>{`По запросу ${key} найдено ${filteredData.length} товаров`}</h1>
-      <CardsWrapper>
-        {filteredData.slice(0, 8).map((el) => (
-          <Card key={el._id} {...el} />
-        ))}
-      </CardsWrapper>
+      {filteredData.length === 0 ? (
+        <NotFound />
+      ) : (
+        <CardsWrapper>
+          {filteredData.slice(0, 8).map((el) => (
+            <Card key={el._id} {...el} />
+          ))}
+        </CardsWrapper>
+      )}
     </>
   );
 };

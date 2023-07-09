@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider, Route, createRoutesFromElements } from 'react-router-dom';
 import './styles.css';
 import MainLayout from '../layout/MainLayout';
-import { Food, Home, NotFound, Product, SearchPage, User } from '../pages';
+import { Food, Home, Error404, Product, SearchPage, User } from '../pages';
 import { FilterProvider } from '../context/FilterContext';
 import { UserProvider } from '../context/UserContext';
 import { ProductProvider } from '../context/ProductContext';
@@ -17,7 +17,7 @@ const router = createBrowserRouter(
       <Route path='/user' element={<User />} />
       <Route path='/product' element={<Food />} />
       <Route path='/product/:id' element={<Product />} />
-      <Route path='*' element={<NotFound />} />
+      <Route path='*' element={<Error404 />} />
     </Route>
   )
 );
