@@ -20,12 +20,10 @@ const User = () => {
   }, [isError, isSuccess]);
 
   const formHandler = async ({ email, password }: { email: string; password: string }) => {
-    console.log('Login', { email, password });
     dispatch(login({ email, password }));
   };
 
   const Logout = () => {
-    console.log('logout');
     dispatch(logout());
   };
 

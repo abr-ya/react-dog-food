@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { isError, not200mes, not201mes, typedCatchHandler } from '../utils';
+import { isError } from '../utils';
 import { IUser } from '../../interfaces';
 import { ILoginUser, INewUser } from './interfaces';
 import { loginRequest, registerRequest } from './authService';
+import { typedCatchHandler } from '../../lib/rtkHelper';
 
 interface IUserState {
   user: IUser;
@@ -42,11 +43,10 @@ export const register = createAsyncThunk<IUser, INewUser, { rejectValue: string 
   'auth/register',
   async (user, { rejectWithValue }) => {
     try {
-      const { data, status } = await registerRequest(user);
+      const { data } = await registerRequest(user);
 
-      return status === 201 ? data : rejectWithValue(not201mes);
+      return data;
     } catch (error) {
-      // rejectWithValue с проверкой типа ошибки и шаблоном сообщения
       return typedCatchHandler(error, rejectWithValue, 'auth/register');
     }
   }
@@ -57,11 +57,10 @@ export const login = createAsyncThunk<IUser, ILoginUser, { rejectValue: string }
   'auth/login',
   async (user, { rejectWithValue }) => {
     try {
-      const { data, status } = await loginRequest(user);
+      const { data } = await loginRequest(user);
 
-      return status === 200 ? data : rejectWithValue(not200mes);
+      return data;
     } catch (error) {
-      // rejectWithValue с проверкой типа ошибки и шаблоном сообщения
       return typedCatchHandler(error, rejectWithValue, 'auth/login');
     }
   }
@@ -71,8 +70,6 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     logout: () => {
       localStorage.removeItem('user');
       return { ...initialState, user: initialUser };

@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { IProduct } from '../interfaces';
 import FilterContext from '../context/FilterContext';
-import { Card, NotFound } from '../components';
+import { Card, Loader, NotFound } from '../components';
 import { CardsWrapper } from '../components/Common.styled';
 import { useAppDispatch, useAppSelector } from '../hooks/typedRedux';
 import { RootStateType } from '../app/store';
@@ -10,7 +10,7 @@ import { getProducts } from '../features/products/productsListSlice';
 const SearchPage = () => {
   const { key } = useContext(FilterContext);
   const [filteredData, setFilteredData] = useState<IProduct[]>([]);
-  const { data } = useAppSelector((state: RootStateType) => state.products); // isLoading
+  const { data, isLoading } = useAppSelector((state: RootStateType) => state.products);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -23,6 +23,8 @@ const SearchPage = () => {
   useEffect(() => {
     if (data && data.total) setFilteredData(key ? filterByName(data.products, key) : data.products);
   }, [data, key]);
+
+  if (isLoading) return <Loader />;
 
   return (
     <>
