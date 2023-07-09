@@ -3,7 +3,6 @@ import './styles.css';
 import MainLayout from '../layout/MainLayout';
 import { Food, Home, Error404, Product, SearchPage, User } from '../pages';
 import { FilterProvider } from '../context/FilterContext';
-import { UserProvider } from '../context/UserContext';
 import { ProductProvider } from '../context/ProductContext';
 import PrivateRoute from '../layout/PrivateRoute';
 
@@ -24,12 +23,10 @@ const router = createBrowserRouter(
 
 export const App = () => {
   return (
-    <UserProvider>
-      <FilterProvider>
-        <ProductProvider>
-          <RouterProvider router={router} />
-        </ProductProvider>
-      </FilterProvider>
-    </UserProvider>
+    <FilterProvider>
+      <ProductProvider>
+        <RouterProvider router={router} />
+      </ProductProvider>
+    </FilterProvider>
   );
 };

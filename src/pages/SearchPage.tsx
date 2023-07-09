@@ -4,14 +4,17 @@ import FilterContext from '../context/FilterContext';
 import { Card, NotFound } from '../components';
 import { CardsWrapper } from '../components/Common.styled';
 import ProductContext from '../context/ProductContext';
-import UserContext from '../context/UserContext';
-import { getProductsReguest } from '../services/api';
+import { getProductsReguest } from '../api';
+import { useAppSelector } from '../hooks/typedRedux';
+import { RootStateType } from '../app/store';
 
 const SearchPage = () => {
   const { key } = useContext(FilterContext);
   const [filteredData, setFilteredData] = useState<IProduct[]>([]);
   const { data, setProducts } = useContext(ProductContext);
-  const { token } = useContext(UserContext);
+  const {
+    user: { token },
+  } = useAppSelector((state: RootStateType) => state.auth);
 
   if (data.length === 0 && token) {
     getProductsReguest(token)

@@ -1,14 +1,12 @@
 // eslint-disable-next-line eslint-comments/disable-enable-pair
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import axios, { AxiosResponse } from 'axios';
+import { IUserLoginPayload } from './contracts';
 
 const baseUrl = 'https://api.react-learning.ru/';
 
-export const LoginReguest = (email: string, password: string) => {
-  return axios.post(`${baseUrl}signin`, { email, password });
-  // const { data, status } = await axios.post(`${baseUrl}signin`, { email, password });
-
-  // return { data, status };
+export const LoginReguest = (payload: IUserLoginPayload) => {
+  return axios.post(`${baseUrl}signin`, payload);
 };
 
 const createOptions = (token: string) => ({

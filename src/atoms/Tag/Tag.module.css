@@ -24,13 +24,13 @@
 .red {
   color: var(--white);
   font-weight: bold;
-  background: #DE0000;
+  background: #de0000;
 }
 
 .grey {
   color: var(--white);
   font-weight: bold;
-  background: #B3C0D9;
+  background: #b3c0d9;
 }
 
 .primary {
