@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { isError, typedCatchHandler } from '../../lib/rtkHelper';
 
-import { getProductsReguest } from './productsListService';
+import { getProductsReguest } from './productsService';
 
 import { IProductsListData } from './interfaces';
 import { normalizeListResponse } from './normalize';

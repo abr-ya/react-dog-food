@@ -43,6 +43,21 @@ export const BtnGhost = styled(Btn)`
   color: var(--text-main);
 `;
 
+export const BtnLink = styled(Btn)`
+  border: none;
+  background: var(--white);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 400;
+  margin-top: 20px;
+  margin-bottom: -20px;
+  padding: 10px 0;
+
+  & > svg {
+    margin-right: 8px;
+  }
+`;
+
 //styleName: Header : H1/ExtraBold;
 export const H1ExtraBold = styled.h1`
   font-family: Nunito;

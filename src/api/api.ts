@@ -11,6 +11,6 @@ export const getProducts = () => {
   return axios.get(`${baseUrl}products`);
 };
 
-export const getProduct = (token: string, id: string) => {
-  return axios.get(`${baseUrl}users/${id}`);
+export const getProduct = (id: string) => {
+  return axios.get(`${baseUrl}products/${id}`);
 };

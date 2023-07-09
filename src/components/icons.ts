@@ -8,4 +8,6 @@ import { ReactComponent as CartIcon } from '../app/icons/ic-cart.svg';
 import { ReactComponent as LikeIcon } from '../app/icons/ic-heart.svg';
 import { ReactComponent as DogIcon } from '../app/icons/ic-profile.svg';
 
-export { InstIcon, TeleIcon, ViberIcon, VkIcon, WhatIcon, CartIcon, LikeIcon, DogIcon };
+import { ReactComponent as ArrowLeftIcon } from '../app/icons/ic-left-arrow.svg';
+
+export { ArrowLeftIcon, InstIcon, TeleIcon, ViberIcon, VkIcon, WhatIcon, CartIcon, LikeIcon, DogIcon };
