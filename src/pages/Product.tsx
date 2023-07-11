@@ -11,7 +11,7 @@ import {
   H3ExtraBold,
   OldPrice,
 } from '../components/Common.styled';
-import { Loader, NotFound } from '../components';
+import { Loader, NotFound, ReviewForm } from '../components';
 import { Block, GrayBlock, ImgBlock, MainWrapper, Subtitle } from './Product.styled';
 import { Rating, Tag } from '../atoms';
 import { getProduct, setLike } from '../features/products/productSlice';
@@ -98,6 +98,10 @@ const Product = () => {
         <Block>
           <H2ExtraBold>Отзывы</H2ExtraBold>
           <BodyP1>{lorem}</BodyP1>
+        </Block>
+        <Block>
+          <H2ExtraBold>Написать отзыв</H2ExtraBold>
+          <ReviewForm productId={id} />
         </Block>
       </MainWrapper>
     </>
