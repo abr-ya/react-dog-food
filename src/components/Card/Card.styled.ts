@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro';
+import { Link } from 'react-router-dom';
 
 export const StyledCard = styled.div`
   display: flex;
@@ -41,4 +42,10 @@ export const OldPrice = styled.span`
   letter-spacing: 0em;
   color: var(--text-main);
   text-decoration: line-through;
+`;
+
+export const NavLink = styled(Link)`
+  &:hover {
+    color: #777;
+  }
 `;

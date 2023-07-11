@@ -1,4 +1,5 @@
 import { useState, FormEvent, HTMLAttributes, DetailedHTMLProps, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import cn from 'classnames';
 import styles from './search.module.css';
 import { ReactComponent as CloseIcon } from './ic-close-input.svg';
@@ -11,10 +12,13 @@ const Search = ({ className, ...props }: SearchProps): JSX.Element => {
   const { setFilter } = useContext(FilterContext);
   const [text, setText] = useState('');
 
+  const navigate = useNavigate();
+
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFilter(text);
     setText('');
+    navigate('search');
   };
 
   const clearHandler = () => {

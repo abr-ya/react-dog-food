@@ -29,21 +29,21 @@ const Footer = ({ className, ...props }: FooterProps): JSX.Element => {
             </CopyWrapper>
           </Left>
           <Menu1>
-            <BodyS1 weight={600}>Каталог</BodyS1>
-            <BodyS1 weight={600}>Акции</BodyS1>
-            <BodyS1 weight={600}>Новости</BodyS1>
-            <BodyS1 weight={600}>Отзывы</BodyS1>
+            <BodyS1 $weight={600}>Каталог</BodyS1>
+            <BodyS1 $weight={600}>Акции</BodyS1>
+            <BodyS1 $weight={600}>Новости</BodyS1>
+            <BodyS1 $weight={600}>Отзывы</BodyS1>
           </Menu1>
           <Menu2>
-            <BodyS1 weight={600}>Оплата и доставка</BodyS1>
-            <BodyS1 weight={600}>Часто спрашивают</BodyS1>
-            <BodyS1 weight={600}>Обратная связь</BodyS1>
-            <BodyS1 weight={600}>Контакты</BodyS1>
+            <BodyS1 $weight={600}>Оплата и доставка</BodyS1>
+            <BodyS1 $weight={600}>Часто спрашивают</BodyS1>
+            <BodyS1 $weight={600}>Обратная связь</BodyS1>
+            <BodyS1 $weight={600}>Контакты</BodyS1>
           </Menu2>
           <Right>
             <RightTitle>Мы на связи</RightTitle>
             <RightContacts>
-              <BodyP1 weight={700}>8 (999) 00-00-00</BodyP1>
+              <BodyP1 $weight={700}>8 (999) 00-00-00</BodyP1>
               <BodyS1>dogfood.ru@gmail.com</BodyS1>
             </RightContacts>
             <RightIcons>
