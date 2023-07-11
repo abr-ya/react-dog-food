@@ -1,0 +1,40 @@
+.todos {
+  display: grid;
+  grid-template-columns: 80% 20%;
+  row-gap: 0.5rem;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+.todos input {
+  padding-top: 0.5rem;
+}
+
+.todos input[type='checkbox'] {
+  zoom: 1.2;
+}
+
+.todos button {
+  background-color: white;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+}
+
+.add {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1rem;
+}
+
+.add input {
+  width: 100%;
+  margin-right: 1rem;
+}
+
+.add button {
+  min-width: 20%;
+  color: white;
+  background-color: blue;
+  border: none;
+  border-radius: 5px;
+}
