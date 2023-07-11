@@ -50,7 +50,7 @@ export const BtnLink = styled(Btn)`
   font-size: 12px;
   font-weight: 400;
   margin-top: 20px;
-  margin-bottom: -20px;
+  margin-bottom: 0;
   padding: 10px 0;
 
   & > svg {
@@ -150,4 +150,13 @@ export const BodyS3 = styled.span`
   letter-spacing: 0em;
   text-align: left;
   color: #7b8e98;
+`;
+
+export const OldPrice = styled.span`
+  font-size: 12px;
+  font-weight: 600;
+  height: 14px;
+  letter-spacing: 0em;
+  color: var(--text-main);
+  text-decoration: line-through;
 `;

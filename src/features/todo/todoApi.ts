@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { getToken } from '../../api/tokenHelper';
 
 export interface ITodo {
   id: number;
@@ -9,7 +10,15 @@ export interface ITodo {
 
 export const todoApi = createApi({
   reducerPath: 'todoApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:4000/' }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'http://localhost:4000/',
+    prepareHeaders: (headers) => {
+      const token = getToken();
+      if (token) headers.set('authorization', token);
+
+      return headers;
+    },
+  }),
   tagTypes: ['Todos'],
   endpoints: (builder) => ({
     getAll: builder.query<ITodo[], void>({

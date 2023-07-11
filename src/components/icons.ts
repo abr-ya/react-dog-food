@@ -9,5 +9,19 @@ import { ReactComponent as LikeIcon } from '../app/icons/ic-heart.svg';
 import { ReactComponent as DogIcon } from '../app/icons/ic-profile.svg';
 
 import { ReactComponent as ArrowLeftIcon } from '../app/icons/ic-left-arrow.svg';
+import { ReactComponent as SmallLikeIcon } from '../app/icons/ic-like.svg';
+import { ReactComponent as SmallRedLikeIcon } from '../app/icons/ic-like-red.svg';
 
-export { ArrowLeftIcon, InstIcon, TeleIcon, ViberIcon, VkIcon, WhatIcon, CartIcon, LikeIcon, DogIcon };
+export {
+  ArrowLeftIcon,
+  InstIcon,
+  TeleIcon,
+  ViberIcon,
+  VkIcon,
+  WhatIcon,
+  CartIcon,
+  LikeIcon,
+  DogIcon,
+  SmallLikeIcon,
+  SmallRedLikeIcon,
+};

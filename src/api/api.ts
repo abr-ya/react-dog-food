@@ -14,3 +14,9 @@ export const getProducts = () => {
 export const getProduct = (id: string) => {
   return axios.get(`${baseUrl}products/${id}`);
 };
+
+export const setProductLike = (id: string, isLike = true) =>
+  axios.request({
+    method: isLike ? 'PUT' : 'DELETE',
+    url: `${baseUrl}products/likes/${id}`,
+  });

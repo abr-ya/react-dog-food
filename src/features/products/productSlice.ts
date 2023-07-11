@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { isError, typedCatchHandler } from '../../lib/rtkHelper';
 
-import { getProductReguest } from './productsService';
+import { getProductReguest, setProductLikeReguest } from './productsService';
 
 import { IProductDetail } from '../../interfaces';
 
@@ -28,6 +28,19 @@ export const getProduct = createAsyncThunk('getProduct', async (id: string, { re
   }
 });
 
+export const setLike = createAsyncThunk(
+  'setLike',
+  async ({ id, like = true }: { id: string; like: boolean }, { rejectWithValue }) => {
+    try {
+      const { data } = await setProductLikeReguest(id, like);
+
+      return data;
+    } catch (error) {
+      return typedCatchHandler(error, rejectWithValue, 'setLike');
+    }
+  }
+);
+
 const productDetailSlice = createSlice({
   initialState,
   name: 'productDetail',
@@ -39,6 +52,14 @@ const productDetailSlice = createSlice({
         state.error = null;
       })
       .addCase(getProduct.fulfilled, (state, action: PayloadAction<any>) => {
+        state.isLoading = false;
+        state.data = action.payload;
+      })
+      .addCase(setLike.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(setLike.fulfilled, (state, action: PayloadAction<any>) => {
         state.isLoading = false;
         state.data = action.payload;
       })

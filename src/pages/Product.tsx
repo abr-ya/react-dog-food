@@ -1,19 +1,28 @@
 import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/typedRedux';
-import { BodyP1, BodyP2, BtnLink, H1ExtraBold, H2ExtraBold } from '../components/Common.styled';
+import {
+  BodyP1,
+  BodyP2,
+  Btn,
+  BtnLink,
+  H1ExtraBold,
+  H2ExtraBold,
+  H3ExtraBold,
+  OldPrice,
+} from '../components/Common.styled';
 import { Loader, NotFound } from '../components';
-import { Block, ImgBlock, MainWrapper, Subtitle } from './Product.styled';
+import { Block, GrayBlock, ImgBlock, MainWrapper, Subtitle } from './Product.styled';
 import { Rating, Tag } from '../atoms';
-import { RootStateType } from '../app/store';
-import { getProduct } from '../features/products/productSlice';
-import { ArrowLeftIcon } from '../components/icons';
+import { getProduct, setLike } from '../features/products/productSlice';
+import { ArrowLeftIcon, SmallLikeIcon, SmallRedLikeIcon } from '../components/icons';
 
 const Product = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const { data, isLoading } = useAppSelector((state: RootStateType) => state.productDetail);
+  const { data, isLoading } = useAppSelector((state) => state.productDetail);
+  const { _id: userId } = useAppSelector((state) => state.auth.user.data);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -21,14 +30,24 @@ const Product = () => {
   }, [id]);
 
   if (isLoading) return <Loader />;
-  if (data === null) return <NotFound />; // todo: гибкий текст!
+  if (data === null || !id) return <NotFound />; // todo: гибкий текст!
 
-  const { _id, description, discount, name, pictures } = data;
+  const { description, discount, likes, name, pictures, price } = data;
 
   const picture = Array.isArray(pictures) ? pictures[0] : pictures; // todo temp!
 
+  const hasMyLike = likes.includes(userId);
+
+  const isSale = discount > 0;
+  const realPrice: number = (price * (100 - discount)) / 100;
+
   const lorem =
     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas perspiciatis corporis ullam ex iste! Voluptatem facere minima amet odio corrupti.';
+
+  const likeHandler = () => {
+    console.log('like!');
+    if (id) dispatch(setLike({ id, like: !hasMyLike }));
+  };
 
   return (
     <>
@@ -40,7 +59,7 @@ const Product = () => {
       </div>
       <H1ExtraBold>{name}</H1ExtraBold>
       <Subtitle>
-        <BodyP2>Артикул: {_id}</BodyP2>
+        <BodyP2>Артикул: {id}</BodyP2>
         <Rating rating={3.5} />
         <BodyP2 $color='dark'>81 отзыв</BodyP2>
       </Subtitle>
@@ -57,7 +76,15 @@ const Product = () => {
             <img src={picture} alt={name} />
           </div>
           <div>
-            <>в корзину, доставка, гарантия</>
+            <OldPrice>{isSale ? `${price} ₽` : ''}</OldPrice>
+            <H3ExtraBold $isred={isSale}>{realPrice} ₽</H3ExtraBold>
+            <Btn>В корзину</Btn>
+            <BtnLink onClick={likeHandler}>
+              {hasMyLike ? <SmallRedLikeIcon /> : <SmallLikeIcon />}
+              {hasMyLike ? 'Разлайкать!' : 'В избрранное'}
+            </BtnLink>
+            <GrayBlock>доставка</GrayBlock>
+            <GrayBlock>гарантия</GrayBlock>
           </div>
         </ImgBlock>
         <Block>
