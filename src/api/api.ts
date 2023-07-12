@@ -1,7 +1,7 @@
 import axios from './axios';
 import { IProductReviewPayload, IUserLoginPayload } from './contracts';
 
-const baseUrl = 'https://api.react-learning.ru/';
+export const baseUrl = 'https://api.react-learning.ru/';
 
 export const LoginReguest = (payload: IUserLoginPayload) => {
   return axios.post(`${baseUrl}signin`, payload);

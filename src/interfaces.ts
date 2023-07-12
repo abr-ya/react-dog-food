@@ -1,14 +1,4 @@
-export interface IUser {
-  data: {
-    name: string;
-    about: string;
-    avatar: string;
-    _id: string;
-    email: string;
-    group: string;
-  };
-  token: string;
-}
+import { IUser } from './api/contracts';
 
 interface IReview {
   _id: string;

@@ -1,7 +1,12 @@
+import { useCallback, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { ApiProvider } from '@reduxjs/toolkit/query/react';
+import { userApi } from '../api/apiQuery';
 import './register.css';
+import { IUserCreatePayload } from '../api/contracts';
 
 interface IFormData {
   email: string;
@@ -33,14 +38,23 @@ const defaultValues = {
 };
 
 const Register = () => {
+  const navigate = useNavigate();
+  const [createUser, { isLoading, isSuccess }] = userApi.useNewUserMutation();
+
+  const onCreate = useCallback((user: IUserCreatePayload) => createUser(user), [createUser]);
+
   const form = useForm<IFormData>({ defaultValues, resolver: yupResolver(schema) });
 
   const { register, handleSubmit, formState } = form;
   const { errors } = formState;
 
-  const onSubmit = (data: IFormData) => {
-    console.log(data);
+  const onSubmit = ({ email, group, password }: IFormData) => {
+    onCreate({ email, group, password });
   };
+
+  useEffect(() => {
+    if (isSuccess) navigate('/user');
+  }, [isSuccess, navigate]);
 
   return (
     <div>
@@ -71,10 +85,16 @@ const Register = () => {
           <p className='error'>{errors.password2?.message}</p>
         </div>
 
-        <button>Зарегистрировать</button>
+        <button disabled={isLoading}>Зарегистрировать</button>
       </form>
     </div>
   );
 };
 
-export default Register;
+const RegisterWithApi = () => (
+  <ApiProvider api={userApi}>
+    <Register />
+  </ApiProvider>
+);
+
+export default RegisterWithApi;

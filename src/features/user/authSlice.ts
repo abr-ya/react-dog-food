@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { isError } from '../utils';
-import { IUser } from '../../interfaces';
+import { IUser } from '../../api/contracts';
 import { ILoginUser, INewUser } from './interfaces';
 import { loginRequest, registerRequest } from './authService';
 import { typedCatchHandler } from '../../lib/rtkHelper';
