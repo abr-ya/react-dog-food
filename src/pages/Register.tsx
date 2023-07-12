@@ -5,8 +5,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { ApiProvider } from '@reduxjs/toolkit/query/react';
 import { userApi } from '../api/apiQuery';
-import './register.css';
 import { IUserCreatePayload } from '../api/contracts';
+import { Btn, BtnGhost, H1ExtraBold } from '../components/Common.styled';
+import { ButtonBlock, InputBlock, StyledLabel, StyledInput } from '../components/Form.styled';
 
 interface IFormData {
   email: string;
@@ -57,37 +58,40 @@ const Register = () => {
   }, [isSuccess, navigate]);
 
   return (
-    <div>
-      <h1>Регистрация нового пользователя</h1>
+    <>
+      <H1ExtraBold>Регистрация пользователя</H1ExtraBold>
 
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
-        <div className='form-control'>
-          <label htmlFor='email'>E-mail</label>
-          <input type='email' id='email' {...register('email')} />
+        <InputBlock>
+          <StyledLabel htmlFor='email'>Email</StyledLabel>
+          <StyledInput type='email' id='email' {...register('email')} />
           <p className='error'>{errors.email?.message}</p>
-        </div>
+        </InputBlock>
 
-        <div className='form-control'>
-          <label htmlFor='group'>Группа</label>
-          <input type='text' id='group' {...register('group')} />
+        <InputBlock>
+          <StyledLabel htmlFor='group'>Группа</StyledLabel>
+          <StyledInput type='text' id='group' {...register('group')} />
           <p className='error'>{errors.group?.message}</p>
-        </div>
+        </InputBlock>
 
-        <div className='form-control'>
-          <label htmlFor='password'>Пароль</label>
-          <input type='password' id='password' {...register('password')} />
+        <InputBlock>
+          <StyledLabel htmlFor='password'>Пароль</StyledLabel>
+          <StyledInput type='password' id='password' {...register('password')} />
           <p className='error'>{errors.password?.message}</p>
-        </div>
+        </InputBlock>
 
-        <div className='form-control'>
-          <label htmlFor='password2'>Подтверждение пароля</label>
-          <input type='password' id='password2' {...register('password2')} />
+        <InputBlock>
+          <StyledLabel htmlFor='password2'>Подтверждение пароля</StyledLabel>
+          <StyledInput type='password' id='password2' {...register('password2')} />
           <p className='error'>{errors.password2?.message}</p>
-        </div>
+        </InputBlock>
 
-        <button disabled={isLoading}>Зарегистрировать</button>
+        <ButtonBlock>
+          <Btn disabled={isLoading}>Зарегистрировать</Btn>
+          <BtnGhost onClick={() => navigate('/user')}>Войти</BtnGhost>
+        </ButtonBlock>
       </form>
-    </div>
+    </>
   );
 };
 
