@@ -2,9 +2,10 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { isError, typedCatchHandler } from '../../lib/rtkHelper';
 
-import { getProductReguest, setProductLikeReguest } from './productsService';
+import { addReviewReguest, getProductReguest, setProductLikeReguest } from './productsService';
 
 import { IProductDetail } from '../../interfaces';
+import { IProductReviewPayload } from '../../api/contracts';
 
 interface IState {
   data: IProductDetail | null;
@@ -41,6 +42,19 @@ export const setLike = createAsyncThunk(
   }
 );
 
+export const addReview = createAsyncThunk(
+  'addReview',
+  async ({ id, payload }: { id: string; payload: IProductReviewPayload }, { rejectWithValue }) => {
+    try {
+      const { data } = await addReviewReguest(id, payload);
+
+      return data;
+    } catch (error) {
+      return typedCatchHandler(error, rejectWithValue, 'addReview');
+    }
+  }
+);
+
 const productDetailSlice = createSlice({
   initialState,
   name: 'productDetail',
@@ -51,7 +65,7 @@ const productDetailSlice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(getProduct.fulfilled, (state, action: PayloadAction<any>) => {
+      .addCase(getProduct.fulfilled, (state, action: PayloadAction<IProductDetail>) => {
         state.isLoading = false;
         state.data = action.payload;
       })
@@ -59,7 +73,15 @@ const productDetailSlice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(setLike.fulfilled, (state, action: PayloadAction<any>) => {
+      .addCase(setLike.fulfilled, (state, action: PayloadAction<IProductDetail>) => {
+        state.isLoading = false;
+        state.data = action.payload;
+      })
+      .addCase(addReview.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(addReview.fulfilled, (state, action: PayloadAction<IProductDetail>) => {
         state.isLoading = false;
         state.data = action.payload;
       })

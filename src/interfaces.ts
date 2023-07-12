@@ -10,6 +10,15 @@ export interface IUser {
   token: string;
 }
 
+interface IReview {
+  _id: string;
+  rating: number;
+  text: string;
+  product: string;
+  created_at: string;
+  updated_at: string;
+}
+
 interface IProductBase {
   _id: string;
   available: boolean;
@@ -32,7 +41,7 @@ export interface IProductDetail extends IProductBase {
   created_at: string;
   isPublished: boolean;
   likes: string[];
-  reviews: any; // todo!
+  reviews: IReview[];
   tags: string[];
   updated_at: string;
 }
