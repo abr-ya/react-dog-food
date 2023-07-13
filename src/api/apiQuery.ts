@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { getToken } from './tokenHelper';
 import { baseUrl } from './api';
-import { IUser, IUserCreatePayload, IUserLoginPayload } from './contracts';
+import { IUser, IUserCreatePayload, IUserLoginPayload, IProductsResponse } from './contracts';
 
 export const userApi = createApi({
   reducerPath: 'userApi',
@@ -33,6 +33,26 @@ export const userApi = createApi({
           body,
         };
       },
+    }),
+  }),
+});
+
+export const productApi = createApi({
+  reducerPath: 'productApi',
+  baseQuery: fetchBaseQuery({
+    baseUrl,
+    prepareHeaders: (headers) => {
+      const token = getToken();
+      if (token) headers.set('authorization', token);
+
+      return headers;
+    },
+  }),
+  tagTypes: ['Product'],
+  endpoints: (builder) => ({
+    getAll: builder.query<IProductsResponse, void>({
+      query: () => 'products',
+      providesTags: [{ type: 'Product', id: 'LIST' }],
     }),
   }),
 });
