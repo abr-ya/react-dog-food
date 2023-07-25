@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { IProduct } from '../../interfaces';
-import { ButtonWrapper, ImageWrapper, NavLink, OldPrice, StyledCard, TextWrapper } from './Card.styled';
-import { Btn, BodyS3, H3ExtraBold } from '../Common.styled';
+import { ButtonWrapper, ImageWrapper, NavLink, StyledCard, TextWrapper } from './Card.styled';
+import { Btn, BodyS3, H3ExtraBold, OldPrice } from '../Common.styled';
 
 // наверняка будут ещё пропсы
 // eslint-disable-next-line @typescript-eslint/no-empty-interface

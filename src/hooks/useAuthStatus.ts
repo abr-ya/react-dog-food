@@ -1,22 +1,19 @@
-import { useState, useEffect, useContext } from 'react';
-// import { useAppSelector } from 'features/typedRedux';
-import UserContext from '../context/UserContext';
+import { useState, useEffect } from 'react';
+import { useAppSelector } from '../hooks/typedRedux';
+import { RootStateType } from '../app/store';
 
 export const useAuthStatus = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [checkingStatus, setCheckingStatus] = useState(true);
 
-  // const { user } = useAppSelector((state) => state.auth);
-  const { data: user } = useContext(UserContext);
+  const {
+    user: { token },
+  } = useAppSelector((state: RootStateType) => state.auth);
 
   useEffect(() => {
-    if (user.name) {
-      setLoggedIn(true);
-    } else {
-      setLoggedIn(false);
-    }
+    setLoggedIn(!!token);
     setCheckingStatus(false);
-  }, [user]);
+  }, [token]);
 
   return { loggedIn, checkingStatus };
 };

@@ -38,7 +38,6 @@ const FilterManager = (): IFilterManagerResult => {
 
   // Set an Filter
   const setFilter = (key: string) => {
-    console.log('setFilter,', key);
     dispatch({
       type: 'SET_FILTER',
       payload: key,

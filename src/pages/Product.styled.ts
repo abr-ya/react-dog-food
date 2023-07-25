@@ -36,3 +36,11 @@ export const ImgBlock = styled(Block)`
     position: absolute;
   }
 `;
+
+export const GrayBlock = styled.div`
+  display: flex;
+  background-color: #eceff180;
+  min-height: 100px;
+  border-radius: 12px;
+  margin: 12px 0;
+`;

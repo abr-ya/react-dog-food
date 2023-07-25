@@ -1,10 +1,8 @@
 import { createBrowserRouter, RouterProvider, Route, createRoutesFromElements } from 'react-router-dom';
 import './styles.css';
 import MainLayout from '../layout/MainLayout';
-import { Food, Home, Error404, Product, SearchPage, User } from '../pages';
+import { Food, Home, Error404, Product, SearchPage, Todo, User } from '../pages';
 import { FilterProvider } from '../context/FilterContext';
-import { UserProvider } from '../context/UserContext';
-import { ProductProvider } from '../context/ProductContext';
 import PrivateRoute from '../layout/PrivateRoute';
 
 const router = createBrowserRouter(
@@ -16,6 +14,7 @@ const router = createBrowserRouter(
       </Route>
       <Route path='/user' element={<User />} />
       <Route path='/product' element={<Food />} />
+      <Route path='/todo' element={<Todo />} />
       <Route path='/product/:id' element={<Product />} />
       <Route path='*' element={<Error404 />} />
     </Route>
@@ -24,12 +23,8 @@ const router = createBrowserRouter(
 
 export const App = () => {
   return (
-    <UserProvider>
-      <FilterProvider>
-        <ProductProvider>
-          <RouterProvider router={router} />
-        </ProductProvider>
-      </FilterProvider>
-    </UserProvider>
+    <FilterProvider>
+      <RouterProvider router={router} />
+    </FilterProvider>
   );
 };

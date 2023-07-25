@@ -1,47 +1,106 @@
+import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { BodyP1, BodyP2, H1ExtraBold, H2ExtraBold } from '../components/Common.styled';
-import { Block, ImgBlock, MainWrapper, Subtitle } from './Product.styled';
+import { useAppDispatch, useAppSelector } from '../hooks/typedRedux';
+import {
+  BodyP1,
+  BodyP2,
+  Btn,
+  BtnLink,
+  H1ExtraBold,
+  H2ExtraBold,
+  H3ExtraBold,
+  OldPrice,
+} from '../components/Common.styled';
+import { Loader, NotFound, ReviewForm } from '../components';
+import { Block, GrayBlock, ImgBlock, MainWrapper, Subtitle } from './Product.styled';
 import { Rating, Tag } from '../atoms';
+import { getProduct, setLike, addReview } from '../features/products/productSlice';
+import { ArrowLeftIcon, SmallLikeIcon, SmallRedLikeIcon } from '../components/icons';
+import { writeCorrect } from '../utils';
+import { IReviewFormData } from '../components/ReviewForm/interfaces';
 
 const Product = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  const { data, isLoading } = useAppSelector((state) => state.productDetail);
+  const { _id: userId } = useAppSelector((state) => state.auth.user.data);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (id) dispatch(getProduct(id));
+  }, [id]);
+
+  if (isLoading) return <Loader />;
+  if (data === null || !id) return <NotFound />; // todo: гибкий текст!
+
+  const { description, discount, likes, name, pictures, price, reviews } = data;
+
+  const picture = Array.isArray(pictures) ? pictures[0] : pictures; // todo temp!
+
+  const hasMyLike = likes.includes(userId);
+
+  const isSale = discount > 0;
+  const realPrice: number = (price * (100 - discount)) / 100;
+
+  const rating = reviews.reduce((acc, el) => acc + el.rating, 0) / reviews.length;
+
   const lorem =
     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas perspiciatis corporis ullam ex iste! Voluptatem facere minima amet odio corrupti.';
 
+  const likeHandler = () => {
+    console.log('like!');
+    if (id) dispatch(setLike({ id, like: !hasMyLike }));
+  };
+
+  const reviewSubmitHandler = (payload: IReviewFormData) => {
+    console.log(payload, id);
+    if (id) dispatch(addReview({ id, payload }));
+  };
+
   return (
     <>
-      <div>Product {id}</div>
       <div>
-        <button onClick={() => navigate(-1)}>Назад к поиску</button>
+        <BtnLink onClick={() => navigate(-1)}>
+          <ArrowLeftIcon />
+          Назад к поиску
+        </BtnLink>
       </div>
-      <H1ExtraBold>Бублик из бычьего корня</H1ExtraBold>
+      <H1ExtraBold>{name}</H1ExtraBold>
       <Subtitle>
-        <BodyP2>Артикул: 2388907</BodyP2>
-        <Rating rating={3.5} />
-        <BodyP2 $color='dark'>81 отзыв</BodyP2>
+        <BodyP2>Артикул: {id}</BodyP2>
+        <Rating rating={rating} />
+        <BodyP2 $color='dark'>
+          {reviews.length} {writeCorrect(reviews.length, ['отзыв', 'отзыва', 'отзывов'])}
+        </BodyP2>
       </Subtitle>
       <MainWrapper>
         <ImgBlock>
-          <div className='abs'>
-            <Tag color='red' size='m'>
-              -10%
-            </Tag>
+          {!!discount && (
+            <div className='abs'>
+              <Tag color='red' size='m'>
+                -{discount}%
+              </Tag>
+            </div>
+          )}
+          <div>
+            <img src={picture} alt={name} />
           </div>
           <div>
-            <img src='https://react-learning.ru/image-compressed/4.jpg' alt='alt-text' />
-          </div>
-          <div>
-            <>в корзину, доставка, гарантия</>
+            <OldPrice>{isSale ? `${price} ₽` : ''}</OldPrice>
+            <H3ExtraBold $isred={isSale}>{realPrice} ₽</H3ExtraBold>
+            <Btn>В корзину</Btn>
+            <BtnLink onClick={likeHandler}>
+              {hasMyLike ? <SmallRedLikeIcon /> : <SmallLikeIcon />}
+              {hasMyLike ? 'Разлайкать!' : 'В избрранное'}
+            </BtnLink>
+            <GrayBlock>доставка</GrayBlock>
+            <GrayBlock>гарантия</GrayBlock>
           </div>
         </ImgBlock>
         <Block>
           <H2ExtraBold>Описание</H2ExtraBold>
-          <BodyP1>
-            Бублик из бычьего корня-забавная, интересная, вкусная, а главное полезная вкусняшка для вашего любимца.
-            Неповторимый вкус этого лакомства надолго отвлечет Вашего питомца от любых дел.
-          </BodyP1>
+          <BodyP1>{description}</BodyP1>
         </Block>
         <Block>
           <H2ExtraBold>Характеристики</H2ExtraBold>
@@ -50,6 +109,10 @@ const Product = () => {
         <Block>
           <H2ExtraBold>Отзывы</H2ExtraBold>
           <BodyP1>{lorem}</BodyP1>
+        </Block>
+        <Block>
+          <H2ExtraBold>Написать отзыв</H2ExtraBold>
+          <ReviewForm onFormSubmit={reviewSubmitHandler} />
         </Block>
       </MainWrapper>
     </>

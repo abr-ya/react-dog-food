@@ -35,15 +35,6 @@ export const ButtonWrapper = styled.div`
   height: 40px;
 `;
 
-export const OldPrice = styled.span`
-  font-size: 12px;
-  font-weight: 600;
-  height: 14px;
-  letter-spacing: 0em;
-  color: var(--text-main);
-  text-decoration: line-through;
-`;
-
 export const NavLink = styled(Link)`
   &:hover {
     color: #777;
