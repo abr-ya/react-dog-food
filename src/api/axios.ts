@@ -5,7 +5,7 @@ axios.interceptors.request.use(
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   async (config) => {
-    const token = getToken();
+    const token = getToken(); // token from LS!
     if (!token) return config;
 
     return {

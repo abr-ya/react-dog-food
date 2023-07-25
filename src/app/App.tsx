@@ -1,9 +1,11 @@
 import { createBrowserRouter, RouterProvider, Route, createRoutesFromElements } from 'react-router-dom';
-import './styles.css';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import MainLayout from '../layout/MainLayout';
-import { Food, Home, Error404, Product, SearchPage, Todo, User } from '../pages';
+import { Food, Home, Error404, Product, SearchPage, Todo, User, Register } from '../pages';
 import { FilterProvider } from '../context/FilterContext';
 import PrivateRoute from '../layout/PrivateRoute';
+import './styles.css';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -13,6 +15,7 @@ const router = createBrowserRouter(
         <Route path='/search' element={<SearchPage />} />
       </Route>
       <Route path='/user' element={<User />} />
+      <Route path='/user/new' element={<Register />} />
       <Route path='/product' element={<Food />} />
       <Route path='/todo' element={<Todo />} />
       <Route path='/product/:id' element={<Product />} />
@@ -25,6 +28,7 @@ export const App = () => {
   return (
     <FilterProvider>
       <RouterProvider router={router} />
+      <ToastContainer />
     </FilterProvider>
   );
 };

@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { isError } from '../utils';
-import { IUser } from '../../interfaces';
+import { IUser } from '../../api/contracts';
 import { ILoginUser, INewUser } from './interfaces';
 import { loginRequest, registerRequest } from './authService';
 import { typedCatchHandler } from '../../lib/rtkHelper';
@@ -70,7 +70,11 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    logout: () => {
+    userLogin: (state, { payload }: PayloadAction<IUser>) => {
+      localStorage.setItem('user', JSON.stringify(payload));
+      state.user = payload;
+    },
+    userLogout: () => {
       localStorage.removeItem('user');
       return { ...initialState, user: initialUser };
     },
@@ -103,5 +107,5 @@ export const authSlice = createSlice({
   },
 });
 
-export const { logout } = authSlice.actions;
+export const { userLogin, userLogout } = authSlice.actions;
 export default authSlice.reducer;
