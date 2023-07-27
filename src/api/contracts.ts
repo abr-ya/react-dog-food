@@ -23,6 +23,12 @@ export interface IUser {
   token: string;
 }
 
+export interface IProductsSearchParams {
+  limit: number;
+  page: number;
+  query: string;
+}
+
 export interface IProductsResponse {
   products: IProduct[];
   total: number;
