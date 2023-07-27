@@ -7,7 +7,7 @@ import { useState } from 'react';
 const PrivateRoute = () => {
   // todo: понять, почему так много раз рендериться роут?!
   // оставляю консоль и комментарий, чтобы разобраться!
-  console.log('PrivateRoute Render');
+  console.log('PrivateRoute Render === понять: почему так много?!');
   const { loggedIn, checkingStatus } = useAuthStatus();
   const [first, setFirst] = useState(true);
 

@@ -48,7 +48,7 @@ export const productApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ['Product'],
+  tagTypes: ['Products'],
   endpoints: (builder) => ({
     getAll: builder.query<IProductsResponse, IProductsSearchParams>({
       query: ({ query, page, limit }) => ({
@@ -62,7 +62,18 @@ export const productApi = createApi({
           query,
         },
       }),
-      providesTags: [{ type: 'Product', id: 'LIST' }],
+      serializeQueryArgs: ({ endpointName, queryArgs: { query } }) => {
+        return endpointName + query;
+      },
+      // Полученные данные мы должны объединить с предыдущими данными в кэше
+      merge: (currentCache, newValue, { arg: { page } }) => {
+        if (page === 1) return;
+        currentCache.products.push(...newValue.products);
+      },
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg !== previousArg;
+      },
+      providesTags: [{ type: 'Products', id: 'LIST' }],
     }),
   }),
 });
