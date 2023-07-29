@@ -4,9 +4,12 @@ import { CardsWrapper } from '../components/Common.styled';
 import { productApi } from '../api/apiQuery';
 import { LoadMore } from '../components/LoadMore/LoadMore';
 import { useSearchParams } from 'react-router-dom';
+import { useAppDispatch } from '../hooks/typedRedux';
+import { addToCart } from '../features/products/cartSlice';
 
 const SearchPage = () => {
   const [sParams] = useSearchParams();
+  const dispatch = useAppDispatch();
   const [page, setPage] = useState(1);
 
   const query = sParams.get('q') || '';
@@ -31,7 +34,7 @@ const SearchPage = () => {
       ) : (
         <CardsWrapper>
           {products.map((el) => (
-            <Card key={el._id} {...el} />
+            <Card key={el._id} {...el} toCart={() => dispatch(addToCart(el))} />
           ))}
           {data && <LoadMore isLoading={isFetching} action={loadMore} isEndOfList={isEndOfList} />}
         </CardsWrapper>

@@ -18,6 +18,7 @@ import { getProduct, setLike, addReview } from '../features/products/productSlic
 import { ArrowLeftIcon, SmallLikeIcon, SmallRedLikeIcon } from '../components/icons';
 import { writeCorrect } from '../utils';
 import { IReviewFormData } from '../components/ReviewForm/interfaces';
+import { addToCart } from '../features/products/cartSlice';
 
 const Product = () => {
   const { id } = useParams();
@@ -34,7 +35,7 @@ const Product = () => {
   if (isLoading) return <Loader />;
   if (data === null || !id) return <NotFound />; // todo: гибкий текст!
 
-  const { description, discount, likes, name, pictures, price, reviews } = data;
+  const { description, discount, likes, name, pictures, price, reviews, stock } = data;
 
   const picture = Array.isArray(pictures) ? pictures[0] : pictures; // todo temp!
 
@@ -49,13 +50,15 @@ const Product = () => {
     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas perspiciatis corporis ullam ex iste! Voluptatem facere minima amet odio corrupti.';
 
   const likeHandler = () => {
-    console.log('like!');
     if (id) dispatch(setLike({ id, like: !hasMyLike }));
   };
 
   const reviewSubmitHandler = (payload: IReviewFormData) => {
-    console.log(payload, id);
     if (id) dispatch(addReview({ id, payload }));
+  };
+
+  const toCartHandler = () => {
+    dispatch(addToCart(data));
   };
 
   return (
@@ -89,7 +92,9 @@ const Product = () => {
           <div>
             <OldPrice>{isSale ? `${price} ₽` : ''}</OldPrice>
             <H3ExtraBold $isred={isSale}>{realPrice} ₽</H3ExtraBold>
-            <Btn>В корзину</Btn>
+            <Btn onClick={toCartHandler} disabled={!stock}>
+              В корзину
+            </Btn>
             <BtnLink onClick={likeHandler}>
               {hasMyLike ? <SmallRedLikeIcon /> : <SmallLikeIcon />}
               {hasMyLike ? 'Разлайкать!' : 'В избрранное'}
