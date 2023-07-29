@@ -1,15 +1,16 @@
-import { useContext, useCallback, useState } from 'react';
-import FilterContext from '../context/FilterContext';
+import { useCallback, useState } from 'react';
 import { Card, Loader, NotFound } from '../components';
 import { CardsWrapper } from '../components/Common.styled';
 import { productApi } from '../api/apiQuery';
 import { LoadMore } from '../components/LoadMore/LoadMore';
+import { useSearchParams } from 'react-router-dom';
 
 const SearchPage = () => {
-  const { key } = useContext(FilterContext);
+  const [sParams] = useSearchParams();
   const [page, setPage] = useState(1);
 
-  const { data, isFetching } = productApi.useGetAllQuery({ query: key, page, limit: 12 });
+  const query = sParams.get('q') || '';
+  const { data, isFetching } = productApi.useGetAllQuery({ query, page, limit: 12 });
 
   const isEndOfList = data?.products && data?.products.length >= data.total;
 
@@ -24,7 +25,7 @@ const SearchPage = () => {
 
   return (
     <>
-      <h1>{`По запросу "${key}" найдено ${data.total} товаров:`}</h1>
+      <h1>{`По запросу "${query}" найдено ${data.total} товаров:`}</h1>
       {products.length === 0 ? (
         <NotFound />
       ) : (

@@ -1,29 +1,27 @@
-import { useState, FormEvent, HTMLAttributes, DetailedHTMLProps, useContext } from 'react';
+import { useState, FormEvent, HTMLAttributes, DetailedHTMLProps } from 'react';
 import { useNavigate } from 'react-router-dom';
 import cn from 'classnames';
 import styles from './search.module.css';
 import { ReactComponent as CloseIcon } from './ic-close-input.svg';
 import { Button, Input } from '../../atoms';
-import FilterContext from '../../context/FilterContext';
 
 type SearchProps = DetailedHTMLProps<HTMLAttributes<HTMLFormElement>, HTMLFormElement>;
 
 const Search = ({ className, ...props }: SearchProps): JSX.Element => {
-  const { setFilter } = useContext(FilterContext);
   const [text, setText] = useState('');
 
   const navigate = useNavigate();
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setFilter(text);
-    setText('');
-    navigate('search');
+    if (text) {
+      setText('');
+      navigate(`search?q=${text}`);
+    }
   };
 
   const clearHandler = () => {
     setText('');
-    setFilter('');
   };
 
   return (
