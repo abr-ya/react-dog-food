@@ -33,11 +33,19 @@ const cartSlice = createSlice({
         state.data.push(normalizeToCart(action.payload));
         toast.success('Товар добавлен в корзину');
       }
+      state.count += 1;
+    },
+    updateCartItem: (state, action: PayloadAction<{ id: string; value: number }>) => {
+      const { id, value } = action.payload;
+      const itemIndex = state.data.findIndex((item) => item._id === id);
+      state.data[itemIndex] = { ...state.data[itemIndex], value };
+      toast.info(`Кол-во товара в корзине изменено на ${value}`);
+      state.count = state.data.reduce((acc, el) => acc + el.value, 0);
     },
     reset: () => initialState,
   },
 });
 
-export const { addToCart, reset } = cartSlice.actions;
+export const { addToCart, updateCartItem, reset } = cartSlice.actions;
 
 export default cartSlice.reducer;

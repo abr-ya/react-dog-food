@@ -1,12 +1,16 @@
-import { useAppSelector } from '../../hooks/typedRedux';
+import { useAppSelector, useAppDispatch } from '../../hooks/typedRedux';
 import { Btn, BodyP1, BodyP2, H1ExtraBold, H3ExtraBold } from '../../components/Common.styled';
 import { ItemsWrapper, StyledCart, Right, Order, Delivery } from './Cart.styled';
-// import { addToCart } from '../../features/products/cartSlice';
+import { updateCartItem } from '../../features/products/cartSlice';
 import Line from './Line/Line';
 
 const Cart = () => {
   const { data } = useAppSelector((state) => state.cart);
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
+
+  const updateHandler = (id: string, value: number) => {
+    dispatch(updateCartItem({ id, value }));
+  };
 
   return (
     <>
@@ -14,7 +18,7 @@ const Cart = () => {
       <StyledCart>
         <ItemsWrapper>
           {data.map((el) => (
-            <Line key={el._id} {...el} />
+            <Line key={el._id} {...el} updateHandler={updateHandler} />
           ))}
         </ItemsWrapper>
         <Right>

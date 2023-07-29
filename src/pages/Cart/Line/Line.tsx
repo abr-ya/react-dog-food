@@ -8,14 +8,15 @@ import { strCut } from '../../../lib/common';
 interface ILine extends IProductInCart {
   plus?: () => void;
   minus?: () => void;
+  updateHandler: (id: string, value: number) => void;
 }
 
-const Line: FC<ILine> = ({ discount, name, pictures, price, stock, wight, value, _id: id }) => {
+const Line: FC<ILine> = ({ discount, name, pictures, price, stock, wight, value, _id: id, updateHandler }) => {
   const isSale = discount > 0;
   const realPrice: number = (price * (100 - discount)) / 100;
 
   const saveHandler = (value: number) => {
-    console.log('set', id, value);
+    updateHandler(id, value);
   };
 
   return (
