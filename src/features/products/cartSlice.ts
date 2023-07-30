@@ -8,12 +8,14 @@ interface IState {
   count: number;
   data: IProductInCart[];
   total: number;
+  withDiscount: number;
 }
 
 const initialState: IState = {
   count: 0,
   data: [],
   total: 0,
+  withDiscount: 0,
 };
 
 const cartSlice = createSlice({
@@ -35,12 +37,14 @@ const cartSlice = createSlice({
       }
       state.count += 1;
       state.total += action.payload.price;
+      state.withDiscount += Math.round((action.payload.price * (100 - action.payload.discount)) / 100);
     },
     removeFromCart: (state, action: PayloadAction<string>) => {
       toast.info(`Товар ${action.payload} удалён из корзины`);
       state.data = state.data.filter((el) => el._id !== action.payload);
       state.count = state.data.reduce((acc, el) => acc + el.value, 0);
       state.total = state.data.reduce((acc, el) => acc + el.value * el.price, 0);
+      state.withDiscount = state.data.reduce((acc, el) => acc + el.value * el.realPrice, 0);
     },
     updateCartItem: (state, action: PayloadAction<{ id: string; value: number }>) => {
       const { id, value } = action.payload;
@@ -49,6 +53,7 @@ const cartSlice = createSlice({
       toast.info(`Кол-во товара в корзине изменено на ${value}`);
       state.count = state.data.reduce((acc, el) => acc + el.value, 0);
       state.total = state.data.reduce((acc, el) => acc + el.value * el.price, 0);
+      state.withDiscount = state.data.reduce((acc, el) => acc + el.value * el.realPrice, 0);
     },
     reset: () => initialState,
   },

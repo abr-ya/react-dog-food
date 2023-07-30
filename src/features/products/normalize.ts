@@ -14,4 +14,14 @@ export const normalizeToCart = ({
   price,
   stock,
   wight,
-}: IProduct | IProductDetail): IProductInCart => ({ _id, value: 1, discount, name, pictures, price, stock, wight });
+}: IProduct | IProductDetail): IProductInCart => ({
+  _id,
+  value: 1,
+  discount,
+  name,
+  pictures,
+  price,
+  realPrice: Math.round((price * (100 - discount)) / 100),
+  stock,
+  wight,
+});

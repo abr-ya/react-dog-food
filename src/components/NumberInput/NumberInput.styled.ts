@@ -29,6 +29,7 @@ export const StyledNumberInput = styled.div`
     color: #262626;
     border: 1px solid gainsboro;
     background-color: white;
+    cursor: pointer;
 
     &.minus {
       border-right: none;

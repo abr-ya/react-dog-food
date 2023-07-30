@@ -39,4 +39,5 @@ export interface IProductDetail extends IProductBase {
 export interface IProductInCart
   extends Pick<IProductBase, '_id' | 'discount' | 'pictures' | 'name' | 'price' | 'stock' | 'wight'> {
   value: number;
+  realPrice: number;
 }

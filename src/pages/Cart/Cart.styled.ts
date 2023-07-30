@@ -27,6 +27,12 @@ export const Order = styled.div`
   padding: 16px;
   border-radius: 12px;
   box-shadow: 0px 2px 16px 0px #60617029;
+  gap: 10px;
+`;
+
+export const Block = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const Delivery = styled.div`

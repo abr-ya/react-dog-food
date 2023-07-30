@@ -11,20 +11,21 @@ import {
   H3ExtraBold,
   OldPrice,
 } from '../components/Common.styled';
-import { Loader, NotFound, ReviewForm } from '../components';
+import { Loader, NotFound, ReviewForm, NumberInput } from '../components';
 import { Block, GrayBlock, ImgBlock, MainWrapper, Subtitle } from './Product.styled';
 import { Rating, Tag } from '../atoms';
 import { getProduct, setLike, addReview } from '../features/products/productSlice';
 import { ArrowLeftIcon, SmallLikeIcon, SmallRedLikeIcon } from '../components/icons';
 import { writeCorrect } from '../utils';
 import { IReviewFormData } from '../components/ReviewForm/interfaces';
-import { addToCart } from '../features/products/cartSlice';
+import { addToCart, updateCartItem } from '../features/products/cartSlice';
 
 const Product = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
   const { data, isLoading } = useAppSelector((state) => state.productDetail);
+  const { data: cartData } = useAppSelector((state) => state.cart);
   const { _id: userId } = useAppSelector((state) => state.auth.user.data);
   const dispatch = useAppDispatch();
 
@@ -42,7 +43,7 @@ const Product = () => {
   const hasMyLike = likes.includes(userId);
 
   const isSale = discount > 0;
-  const realPrice: number = (price * (100 - discount)) / 100;
+  const realPrice: number = Math.round((price * (100 - discount)) / 100);
 
   const rating = reviews.reduce((acc, el) => acc + el.rating, 0) / reviews.length;
 
@@ -59,6 +60,13 @@ const Product = () => {
 
   const toCartHandler = () => {
     dispatch(addToCart(data));
+  };
+
+  const itemInCart = cartData.find((el) => el._id === id);
+  const nowInCart = itemInCart?.value || 0;
+
+  const updateHandler = (value: number) => {
+    dispatch(updateCartItem({ id, value }));
   };
 
   return (
@@ -92,9 +100,13 @@ const Product = () => {
           <div>
             <OldPrice>{isSale ? `${price} ₽` : ''}</OldPrice>
             <H3ExtraBold $isred={isSale}>{realPrice} ₽</H3ExtraBold>
-            <Btn onClick={toCartHandler} disabled={!stock}>
-              В корзину
-            </Btn>
+            {nowInCart ? (
+              <NumberInput value={nowInCart} saveHandler={updateHandler} max={stock} />
+            ) : (
+              <Btn onClick={toCartHandler} disabled={!stock}>
+                В корзину
+              </Btn>
+            )}
             <BtnLink onClick={likeHandler}>
               {hasMyLike ? <SmallRedLikeIcon /> : <SmallLikeIcon />}
               {hasMyLike ? 'Разлайкать!' : 'В избрранное'}

@@ -1,12 +1,12 @@
 import { toast } from 'react-toastify';
 import { useAppSelector, useAppDispatch } from '../../hooks/typedRedux';
 import { Btn, BodyP1, BodyP2, H1ExtraBold, H3ExtraBold } from '../../components/Common.styled';
-import { ItemsWrapper, StyledCart, Right, Order, Delivery } from './Cart.styled';
+import { ItemsWrapper, StyledCart, Right, Order, Delivery, Block } from './Cart.styled';
 import { updateCartItem, removeFromCart } from '../../features/products/cartSlice';
 import Line from './Line/Line';
 
 const Cart = () => {
-  const { count, data, total } = useAppSelector((state) => state.cart);
+  const { count, data, total, withDiscount } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
 
   const updateHandler = (id: string, value: number) => {
@@ -39,11 +39,18 @@ const Cart = () => {
         <Right>
           <Order>
             <H3ExtraBold>Ваша корзина</H3ExtraBold>
-            <p>
-              товары ({count}) === {total}
-            </p>
-            <p>скидка</p>
-            <p>общая стоимость</p>
+            <Block>
+              <BodyP2>товары ({count})</BodyP2>
+              <BodyP2>{total} ₽</BodyP2>
+            </Block>
+            <Block>
+              <BodyP2>скидка</BodyP2>
+              <H3ExtraBold $isred={true}>- {total - withDiscount} ₽</H3ExtraBold>
+            </Block>
+            <Block>
+              <BodyP2>общая стоимость</BodyP2>
+              <H3ExtraBold>{withDiscount} ₽</H3ExtraBold>
+            </Block>
             <Btn>Оформить заказ</Btn>
           </Order>
           <Delivery>
