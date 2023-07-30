@@ -34,6 +34,13 @@ const cartSlice = createSlice({
         toast.success('Товар добавлен в корзину');
       }
       state.count += 1;
+      state.total += action.payload.price;
+    },
+    removeFromCart: (state, action: PayloadAction<string>) => {
+      toast.info(`Товар ${action.payload} удалён из корзины`);
+      state.data = state.data.filter((el) => el._id !== action.payload);
+      state.count = state.data.reduce((acc, el) => acc + el.value, 0);
+      state.total = state.data.reduce((acc, el) => acc + el.value * el.price, 0);
     },
     updateCartItem: (state, action: PayloadAction<{ id: string; value: number }>) => {
       const { id, value } = action.payload;
@@ -41,11 +48,12 @@ const cartSlice = createSlice({
       state.data[itemIndex] = { ...state.data[itemIndex], value };
       toast.info(`Кол-во товара в корзине изменено на ${value}`);
       state.count = state.data.reduce((acc, el) => acc + el.value, 0);
+      state.total = state.data.reduce((acc, el) => acc + el.value * el.price, 0);
     },
     reset: () => initialState,
   },
 });
 
-export const { addToCart, updateCartItem, reset } = cartSlice.actions;
+export const { addToCart, updateCartItem, removeFromCart, reset } = cartSlice.actions;
 
 export default cartSlice.reducer;

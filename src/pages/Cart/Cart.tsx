@@ -2,11 +2,11 @@ import { toast } from 'react-toastify';
 import { useAppSelector, useAppDispatch } from '../../hooks/typedRedux';
 import { Btn, BodyP1, BodyP2, H1ExtraBold, H3ExtraBold } from '../../components/Common.styled';
 import { ItemsWrapper, StyledCart, Right, Order, Delivery } from './Cart.styled';
-import { updateCartItem } from '../../features/products/cartSlice';
+import { updateCartItem, removeFromCart } from '../../features/products/cartSlice';
 import Line from './Line/Line';
 
 const Cart = () => {
-  const { data } = useAppSelector((state) => state.cart);
+  const { count, data, total } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
 
   const updateHandler = (id: string, value: number) => {
@@ -18,7 +18,7 @@ const Cart = () => {
   };
 
   const removeHandler = (id: string) => {
-    console.log('remove', id);
+    dispatch(removeFromCart(id));
   };
 
   return (
@@ -39,7 +39,9 @@ const Cart = () => {
         <Right>
           <Order>
             <H3ExtraBold>Ваша корзина</H3ExtraBold>
-            <p>товары</p>
+            <p>
+              товары ({count}) === {total}
+            </p>
             <p>скидка</p>
             <p>общая стоимость</p>
             <Btn>Оформить заказ</Btn>

@@ -6,7 +6,7 @@ import { StyledNumberInput } from './NumberInput.styled';
 interface INumberInput {
   value: number; // значение "сверху"
   saveHandler: (value: number) => void; // действия "значение вверх"
-  errorHandler: (error: string) => void;
+  errorHandler?: (error: string) => void;
   max?: number;
 }
 
@@ -28,7 +28,11 @@ const NumberInput = ({ value, max, saveHandler, errorHandler }: INumberInput) =>
     const errorMessage = maxError ? maxErrorMessage : minErrorMessage;
 
     if (maxError || minError) {
-      errorHandler(errorMessage);
+      if (errorHandler) {
+        errorHandler(errorMessage);
+      } else {
+        console.log(`Произошла ошибка: ${errorMessage} (обработчик не передан в компонент)`);
+      }
     } else {
       setIsActive(false);
       // есть ли изменения?
