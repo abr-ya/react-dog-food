@@ -11,7 +11,6 @@ export const ItemsWrapper = styled.div`
   width: 620px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   gap: 10px;
 `;
 

@@ -12,6 +12,8 @@ import { ReactComponent as ArrowLeftIcon } from '../app/icons/ic-left-arrow.svg'
 import { ReactComponent as SmallLikeIcon } from '../app/icons/ic-like.svg';
 import { ReactComponent as SmallRedLikeIcon } from '../app/icons/ic-like-red.svg';
 
+import { ReactComponent as TrashIcon } from '../app/icons/ic-trash.svg';
+
 export {
   ArrowLeftIcon,
   InstIcon,
@@ -24,4 +26,5 @@ export {
   DogIcon,
   SmallLikeIcon,
   SmallRedLikeIcon,
+  TrashIcon,
 };

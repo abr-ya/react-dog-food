@@ -2,7 +2,7 @@ import styled from 'styled-components/macro';
 
 export const StyledLine = styled.div`
   display: flex;
-  gap: 20px;
+  gap: 30px;
   width: 100%;
   min-height: 90px;
   padding: 10px 0;
@@ -24,6 +24,7 @@ export const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 10px;
   width: 244px;
 `;
 
@@ -31,4 +32,8 @@ export const Block = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  & > svg {
+    cursor: pointer;
+  }
 `;

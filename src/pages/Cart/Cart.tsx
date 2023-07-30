@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import { useAppSelector, useAppDispatch } from '../../hooks/typedRedux';
 import { Btn, BodyP1, BodyP2, H1ExtraBold, H3ExtraBold } from '../../components/Common.styled';
 import { ItemsWrapper, StyledCart, Right, Order, Delivery } from './Cart.styled';
@@ -12,13 +13,27 @@ const Cart = () => {
     dispatch(updateCartItem({ id, value }));
   };
 
+  const errorHandler = (error: string) => {
+    toast.error(`Не можем обновить: ${error}`);
+  };
+
+  const removeHandler = (id: string) => {
+    console.log('remove', id);
+  };
+
   return (
     <>
       <H1ExtraBold>Корзина</H1ExtraBold>
       <StyledCart>
         <ItemsWrapper>
           {data.map((el) => (
-            <Line key={el._id} {...el} updateHandler={updateHandler} />
+            <Line
+              key={el._id}
+              {...el}
+              updateHandler={updateHandler}
+              errorHandler={errorHandler}
+              removeHandler={() => removeHandler(el._id)}
+            />
           ))}
         </ItemsWrapper>
         <Right>

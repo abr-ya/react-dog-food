@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, KeyboardEvent } from 'react';
 import { BodyP1 } from '../../components/Common.styled';
 import Sign from './Sign';
 import { StyledNumberInput } from './NumberInput.styled';
@@ -6,10 +6,11 @@ import { StyledNumberInput } from './NumberInput.styled';
 interface INumberInput {
   value: number; // значение "сверху"
   saveHandler: (value: number) => void; // действия "значение вверх"
+  errorHandler: (error: string) => void;
   max?: number;
 }
 
-const NumberInput = ({ value, max, saveHandler }: INumberInput) => {
+const NumberInput = ({ value, max, saveHandler, errorHandler }: INumberInput) => {
   const [isActive, setIsActive] = useState(false);
   const [inputValue, setInputValue] = useState(value || 0);
 
@@ -17,17 +18,17 @@ const NumberInput = ({ value, max, saveHandler }: INumberInput) => {
     setInputValue(value);
   }, [value]);
 
-  // разбираем ошибки
-  const maxError = max && inputValue > max;
-  const minError = inputValue < 1;
-
-  const maxErrorMessage = 'Введенное значение больше допустимого';
-  const minErrorMessage = 'Введенное значение меньше допустимого';
-  const errorMessage = maxError ? maxErrorMessage : minErrorMessage;
-
   const saveHandler2 = () => {
+    // разбираем ошибки
+    const maxError = max && inputValue > max;
+    const minError = inputValue < 1;
+
+    const maxErrorMessage = 'Введенное значение больше допустимого';
+    const minErrorMessage = 'Введенное значение меньше допустимого';
+    const errorMessage = maxError ? maxErrorMessage : minErrorMessage;
+
     if (maxError || minError) {
-      console.log('error:', errorMessage);
+      errorHandler(errorMessage);
     } else {
       setIsActive(false);
       // есть ли изменения?
@@ -35,9 +36,10 @@ const NumberInput = ({ value, max, saveHandler }: INumberInput) => {
     }
   };
 
-  const keyDownHandler = (e: any) => {
+  const keyDownHandler = (e: KeyboardEvent) => {
     if (isActive && e.key === 'Enter') saveHandler2();
-    if (isActive && '-'.includes(e.key)) e.preventDefault(); // в строку для блокировки можно добавлять значения
+    // todo: нужно ли блокировать ввод отрицательных чисел, или лучше выводить сообщение?
+    // if (isActive && '-'.includes(e.key)) e.preventDefault(); // в строку для блокировки можно добавлять значения
   };
 
   return (

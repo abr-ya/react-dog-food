@@ -45,13 +45,17 @@ export const StyledNumberInput = styled.div`
   }
 
   & .edit {
-    padding: 3px 9px;
+    padding: 3px 0;
     height: 36px;
     width: 30px;
     border-radius: 0;
     border: 1px solid gainsboro;
     border-right: none;
     border-left: none;
+
+    & > p {
+      text-align: center;
+    }
   }
 
   & .edit:hover {
