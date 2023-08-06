@@ -1,9 +1,9 @@
-import { FC } from 'react';
-import { IProduct } from '../../interfaces';
-import { ButtonWrapper, ImageWrapper, NavLink, StyledCard, TextWrapper } from './Card.styled';
-import { Btn, BodyS3, H3ExtraBold, OldPrice } from '../Common.styled';
-import { NumberInput } from '../';
-import { strCut } from '../../lib/common';
+import { FC } from "react";
+import { IProduct } from "../../interfaces";
+import { ButtonWrapper, ImageWrapper, NavLink, StyledCard, TextWrapper } from "./Card.styled";
+import { Btn, BodyS3, H3ExtraBold, OldPrice } from "../Common.styled";
+import { NumberInput } from "../";
+import { strCut } from "../../lib/common";
 
 interface ICard extends IProduct {
   nowInCart: number;
@@ -22,7 +22,7 @@ const Card: FC<ICard> = ({ discount, name, pictures, price, stock, _id: id, nowI
       </ImageWrapper>
       <TextWrapper>
         {/* isSale && but height */}
-        <OldPrice>{isSale ? `${price} ₽` : ''}</OldPrice>
+        <OldPrice>{isSale ? `${price} ₽` : ""}</OldPrice>
         <H3ExtraBold $isred={isSale}>{realPrice} ₽</H3ExtraBold>
         <BodyS3>{stock} шт</BodyS3>
         <NavLink to={`/product/${id}`}>{strCut(name, 50)}</NavLink>

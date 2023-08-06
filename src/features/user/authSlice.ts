@@ -1,9 +1,9 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { isError } from '../utils';
-import { IUser } from '../../api/contracts';
-import { ILoginUser, INewUser } from './interfaces';
-import { loginRequest, registerRequest } from './authService';
-import { typedCatchHandler } from '../../lib/rtkHelper';
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { isError } from "../utils";
+import { IUser } from "../../api/contracts";
+import { ILoginUser, INewUser } from "./interfaces";
+import { loginRequest, registerRequest } from "./authService";
+import { typedCatchHandler } from "../../lib/rtkHelper";
 
 interface IUserState {
   user: IUser;
@@ -16,18 +16,18 @@ interface IUserState {
 // Get user from localstorage
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-const user = JSON.parse(localStorage.getItem('user'));
+const user = JSON.parse(localStorage.getItem("user"));
 
 const initialUser: IUser = {
   data: {
-    name: '',
-    about: '',
-    avatar: '',
-    _id: '',
-    email: '',
-    group: '',
+    name: "",
+    about: "",
+    avatar: "",
+    _id: "",
+    email: "",
+    group: "",
   },
-  token: '',
+  token: "",
 };
 
 const initialState: IUserState = {
@@ -35,47 +35,47 @@ const initialState: IUserState = {
   isError: false,
   isSuccess: false,
   isLoading: false,
-  error: '',
+  error: "",
 };
 
 // Register new user
 export const register = createAsyncThunk<IUser, INewUser, { rejectValue: string }>(
-  'auth/register',
+  "auth/register",
   async (user, { rejectWithValue }) => {
     try {
       const { data } = await registerRequest(user);
 
       return data;
     } catch (error) {
-      return typedCatchHandler(error, rejectWithValue, 'auth/register');
+      return typedCatchHandler(error, rejectWithValue, "auth/register");
     }
-  }
+  },
 );
 
 // Login user
 export const login = createAsyncThunk<IUser, ILoginUser, { rejectValue: string }>(
-  'auth/login',
+  "auth/login",
   async (user, { rejectWithValue }) => {
     try {
       const { data } = await loginRequest(user);
 
       return data;
     } catch (error) {
-      return typedCatchHandler(error, rejectWithValue, 'auth/login');
+      return typedCatchHandler(error, rejectWithValue, "auth/login");
     }
-  }
+  },
 );
 
 export const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState,
   reducers: {
     userLogin: (state, { payload }: PayloadAction<IUser>) => {
-      localStorage.setItem('user', JSON.stringify(payload));
+      localStorage.setItem("user", JSON.stringify(payload));
       state.user = payload;
     },
     userLogout: () => {
-      localStorage.removeItem('user');
+      localStorage.removeItem("user");
       return { ...initialState, user: initialUser };
     },
   },

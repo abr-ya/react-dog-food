@@ -17,3 +17,6 @@ lerna-debug.log*
 
 build
 dist
+
+tests/__coverage__/
+tests/**/*.jsx

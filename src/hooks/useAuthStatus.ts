@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { useAppSelector } from '../hooks/typedRedux';
-import { RootStateType } from '../app/store';
+import { useState, useEffect } from "react";
+import { useAppSelector } from "../hooks/typedRedux";
+import { RootStateType } from "../app/store";
 
 export const useAuthStatus = () => {
   const [loggedIn, setLoggedIn] = useState(false);

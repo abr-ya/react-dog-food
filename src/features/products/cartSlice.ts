@@ -1,8 +1,8 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
-import { IProduct, IProductDetail, IProductInCart } from '../../interfaces';
-import { normalizeToCart } from './normalize';
+import { IProduct, IProductDetail, IProductInCart } from "../../interfaces";
+import { normalizeToCart } from "./normalize";
 
 interface IState {
   count: number;
@@ -20,7 +20,7 @@ const initialState: IState = {
 
 const cartSlice = createSlice({
   initialState,
-  name: 'cart',
+  name: "cart",
   reducers: {
     addToCart: (state, action: PayloadAction<IProduct | IProductDetail>) => {
       const existingIndex = state.data.findIndex((item) => item._id === action.payload._id);
@@ -30,10 +30,10 @@ const cartSlice = createSlice({
           ...state.data[existingIndex],
           value: state.data[existingIndex].value + 1,
         };
-        toast.info('Увеличено кол-во товара в корзине');
+        toast.info("Увеличено кол-во товара в корзине");
       } else {
         state.data.push(normalizeToCart(action.payload));
-        toast.success('Товар добавлен в корзину');
+        toast.success("Товар добавлен в корзину");
       }
       state.count += 1;
       state.total += action.payload.price;

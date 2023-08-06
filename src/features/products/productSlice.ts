@@ -1,11 +1,11 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { isError, typedCatchHandler } from '../../lib/rtkHelper';
+import { isError, typedCatchHandler } from "../../lib/rtkHelper";
 
-import { addReviewReguest, getProductReguest, setProductLikeReguest } from './productsService';
+import { addReviewReguest, getProductReguest, setProductLikeReguest } from "./productsService";
 
-import { IProductDetail } from '../../interfaces';
-import { IProductReviewPayload } from '../../api/contracts';
+import { IProductDetail } from "../../interfaces";
+import { IProductReviewPayload } from "../../api/contracts";
 
 interface IState {
   data: IProductDetail | null;
@@ -19,45 +19,45 @@ const initialState: IState = {
   isLoading: false,
 };
 
-export const getProduct = createAsyncThunk('getProduct', async (id: string, { rejectWithValue }) => {
+export const getProduct = createAsyncThunk("getProduct", async (id: string, { rejectWithValue }) => {
   try {
     const { data } = await getProductReguest(id);
 
     return data;
   } catch (error) {
-    return typedCatchHandler(error, rejectWithValue, 'getProduct');
+    return typedCatchHandler(error, rejectWithValue, "getProduct");
   }
 });
 
 export const setLike = createAsyncThunk(
-  'setLike',
+  "setLike",
   async ({ id, like = true }: { id: string; like: boolean }, { rejectWithValue }) => {
     try {
       const { data } = await setProductLikeReguest(id, like);
 
       return data;
     } catch (error) {
-      return typedCatchHandler(error, rejectWithValue, 'setLike');
+      return typedCatchHandler(error, rejectWithValue, "setLike");
     }
-  }
+  },
 );
 
 export const addReview = createAsyncThunk(
-  'addReview',
+  "addReview",
   async ({ id, payload }: { id: string; payload: IProductReviewPayload }, { rejectWithValue }) => {
     try {
       const { data } = await addReviewReguest(id, payload);
 
       return data;
     } catch (error) {
-      return typedCatchHandler(error, rejectWithValue, 'addReview');
+      return typedCatchHandler(error, rejectWithValue, "addReview");
     }
-  }
+  },
 );
 
 const productDetailSlice = createSlice({
   initialState,
-  name: 'productDetail',
+  name: "productDetail",
   // eslint-disable-next-line sort-keys
   extraReducers: (builder) => {
     builder

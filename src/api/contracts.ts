@@ -1,4 +1,4 @@
-import { IProduct } from '../interfaces';
+import { IProduct } from "../interfaces";
 // import { AxiosResponse } from 'axios';
 export interface IUserCreatePayload {
   email: string;

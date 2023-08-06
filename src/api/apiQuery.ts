@@ -1,26 +1,26 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { getToken } from './tokenHelper';
-import { baseUrl } from './api';
-import { IUser, IUserCreatePayload, IUserLoginPayload, IProductsResponse, IProductsSearchParams } from './contracts';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { getToken } from "./tokenHelper";
+import { baseUrl } from "./api";
+import { IUser, IUserCreatePayload, IUserLoginPayload, IProductsResponse, IProductsSearchParams } from "./contracts";
 
 export const userApi = createApi({
-  reducerPath: 'userApi',
+  reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
     baseUrl,
     prepareHeaders: (headers) => {
       const token = getToken();
-      if (token) headers.set('authorization', token);
+      if (token) headers.set("authorization", token);
 
       return headers;
     },
   }),
-  tagTypes: ['User'],
+  tagTypes: ["User"],
   endpoints: (builder) => ({
     newUser: builder.mutation<IUser, IUserCreatePayload>({
       query(body) {
         return {
-          url: 'signup',
-          method: 'POST',
+          url: "signup",
+          method: "POST",
           body,
         };
       },
@@ -28,8 +28,8 @@ export const userApi = createApi({
     login: builder.mutation<IUser, IUserLoginPayload>({
       query(body) {
         return {
-          url: 'signin',
-          method: 'POST',
+          url: "signin",
+          method: "POST",
           body,
         };
       },
@@ -38,21 +38,21 @@ export const userApi = createApi({
 });
 
 export const productApi = createApi({
-  reducerPath: 'productApi',
+  reducerPath: "productApi",
   baseQuery: fetchBaseQuery({
     baseUrl,
     prepareHeaders: (headers) => {
       const token = getToken();
-      if (token) headers.set('authorization', token);
+      if (token) headers.set("authorization", token);
 
       return headers;
     },
   }),
-  tagTypes: ['Products'],
+  tagTypes: ["Products"],
   endpoints: (builder) => ({
     getAll: builder.query<IProductsResponse, IProductsSearchParams>({
       query: ({ query, page, limit }) => ({
-        url: '/products',
+        url: "/products",
         params: {
           page,
           // Для проекта с постами мы жестко зафиксировали, что одна
@@ -73,7 +73,7 @@ export const productApi = createApi({
       forceRefetch({ currentArg, previousArg }) {
         return currentArg !== previousArg;
       },
-      providesTags: [{ type: 'Products', id: 'LIST' }],
+      providesTags: [{ type: "Products", id: "LIST" }],
     }),
   }),
 });

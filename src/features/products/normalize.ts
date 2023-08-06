@@ -1,6 +1,6 @@
-import { IProductsResponse } from '../../api/contracts';
-import { IProduct, IProductDetail, IProductInCart } from '../../interfaces';
-import { IProductsListData } from './interfaces';
+import { IProductsResponse } from "../../api/contracts";
+import { IProduct, IProductDetail, IProductInCart } from "../../interfaces";
+import { IProductsListData } from "./interfaces";
 
 export const normalizeListResponse = (response: IProductsResponse): IProductsListData => {
   return response;

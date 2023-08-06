@@ -1,5 +1,5 @@
-import { FC, useLayoutEffect, useRef } from 'react';
-import Loader from '../Loader/Loader';
+import { FC, useLayoutEffect, useRef } from "react";
+import Loader from "../Loader/Loader";
 
 interface ILoadMore {
   action: () => void;
@@ -49,7 +49,7 @@ export const LoadMore: FC<ILoadMore> = ({ action, isLoading, isEndOfList }) => {
   }, [action, isEndOfList]);
 
   return (
-    <div ref={ref} style={{ height: '100px', width: '100%' }}>
+    <div ref={ref} style={{ height: "100px", width: "100%" }}>
       {isLoading && <Loader />}
       {isEndOfList && <div>End of list!</div>}
     </div>

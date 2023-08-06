@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components/macro';
+import styled, { css } from "styled-components/macro";
 
 export const Container = styled.div`
   max-width: 992px;
@@ -106,7 +106,7 @@ export const BodyP1 = styled.p<{ $weight?: number }>`
 `;
 
 //styleName: Body : P2;
-export const BodyP2 = styled.p<{ $color?: 'primary' | 'dark' | 'light'; $weight?: number }>`
+export const BodyP2 = styled.p<{ $color?: "primary" | "dark" | "light"; $weight?: number }>`
   font-family: Nunito;
   font-size: 14px;
   font-weight: ${({ $weight = 400 }) => $weight};
@@ -115,17 +115,17 @@ export const BodyP2 = styled.p<{ $color?: 'primary' | 'dark' | 'light'; $weight?
   text-align: left;
 
   ${({ $color }) =>
-    $color === 'primary' &&
+    $color === "primary" &&
     css`
       color: var(--primary);
     `}
   ${({ $color }) =>
-    $color === 'dark' &&
+    $color === "dark" &&
     css`
       color: var(--primary-dark);
     `}
   ${({ $color }) =>
-    $color === 'light' &&
+    $color === "light" &&
     css`
       color: var(--primary-light);
     `}

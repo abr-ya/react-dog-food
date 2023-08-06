@@ -1,5 +1,5 @@
-import { addReview, getProducts, getProduct, setProductLike } from '../../api';
-import { IProductReviewPayload } from '../../api/contracts';
+import { addReview, getProducts, getProduct, setProductLike } from "../../api";
+import { IProductReviewPayload } from "../../api/contracts";
 
 export const getProductsReguest = async () => {
   const { data, status } = await getProducts();

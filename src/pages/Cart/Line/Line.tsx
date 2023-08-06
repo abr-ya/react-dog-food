@@ -1,10 +1,10 @@
-import { FC } from 'react';
-import { IProductInCart } from '../../../interfaces';
-import { Block, ImageWrapper, StyledLine, TextWrapper } from './Line.styled';
-import { NumberInput } from '../../../components/';
-import { BodyS3, H3ExtraBold, OldPrice } from '../../../components/Common.styled';
-import { strCut } from '../../../lib/common';
-import { TrashIcon } from '../../../components/icons';
+import { FC } from "react";
+import { IProductInCart } from "../../../interfaces";
+import { Block, ImageWrapper, StyledLine, TextWrapper } from "./Line.styled";
+import { NumberInput } from "../../../components/";
+import { BodyS3, H3ExtraBold, OldPrice } from "../../../components/Common.styled";
+import { strCut } from "../../../lib/common";
+import { TrashIcon } from "../../../components/icons";
 
 interface ILine extends IProductInCart {
   plus?: () => void;

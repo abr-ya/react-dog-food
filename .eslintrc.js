@@ -1,36 +1,26 @@
 module.exports = {
-	parser: '@typescript-eslint/parser',
-	parserOptions: {
-		ecmaVersion: 2020,
-		sourceType: 'module',
-		warnOnUnsupportedTypeScriptVersion: false,
-	},
-	settings: {
-		react: {
-			version: 'detect',
-		},
-	},
-	extends: [
-		'plugin:@typescript-eslint/recommended',
-		'plugin:prettier/recommended',
-		'prettier',
-		'plugin:react/recommended',
-		'plugin:react-hooks/recommended',
-		'plugin:import/errors',
-		'plugin:import/warnings',
-		'plugin:import/typescript',
-		'plugin:jsx-a11y/recommended',
-		'plugin:eslint-comments/recommended',
-	],
-	rules: {
-		semi: [2, 'always'],
-		quotes: [2, 'single', { avoidEscape: true }],
-		'no-unused-vars': 'off',
-		'@typescript-eslint/no-unused-vars': ['error'],
-		'@typescript-eslint/no-var-requires': 'off',
-		'react/prop-types': 'off',
-		'react/jsx-uses-react': 'off',
-		'react/react-in-jsx-scope': 'off',
-		'@typescript-eslint/explicit-module-boundary-types': 'off',
-	},
+  extends: [
+    "plugin:react/recommended", // Uses the recommended rules from @eslint-plugin-react
+    "plugin:@typescript-eslint/recommended", // Uses the recommended rules from the @typescript-eslint/eslint-plugin
+    "plugin:prettier/recommended", // Enables eslint-plugin-prettier and eslint-config-prettier. This will display prettier errors as ESLint errors.
+  ],
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    sourceType: "module",
+    ecmaVersion: 2020,
+    ecmaFeatures: {
+      jsx: true, // Allows for the parsing of JSX
+    },
+  },
+  plugins: ["@typescript-eslint"],
+  settings: {
+    react: {
+      version: "detect", // Tells eslint-plugin-react to automatically detect the version of React to use
+    },
+  },
+  // Fine tune rules
+  rules: {
+    "@typescript-eslint/no-var-requires": 0,
+    "react/react-in-jsx-scope": 0,
+  },
 };

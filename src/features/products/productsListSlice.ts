@@ -1,11 +1,11 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { isError, typedCatchHandler } from '../../lib/rtkHelper';
+import { isError, typedCatchHandler } from "../../lib/rtkHelper";
 
-import { getProductsReguest } from './productsService';
+import { getProductsReguest } from "./productsService";
 
-import { IProductsListData } from './interfaces';
-import { normalizeListResponse } from './normalize';
+import { IProductsListData } from "./interfaces";
+import { normalizeListResponse } from "./normalize";
 
 interface IState {
   data: IProductsListData;
@@ -22,19 +22,19 @@ const initialState: IState = {
   isLoading: false,
 };
 
-export const getProducts = createAsyncThunk('acts/find', async (_, { rejectWithValue }) => {
+export const getProducts = createAsyncThunk("acts/find", async (_, { rejectWithValue }) => {
   try {
     const { data } = await getProductsReguest();
 
     return data;
   } catch (error) {
-    return typedCatchHandler(error, rejectWithValue, 'acts/find');
+    return typedCatchHandler(error, rejectWithValue, "acts/find");
   }
 });
 
 const productsListSlice = createSlice({
   initialState,
-  name: 'productsList',
+  name: "productsList",
   // eslint-disable-next-line sort-keys
   extraReducers: (builder) => {
     builder

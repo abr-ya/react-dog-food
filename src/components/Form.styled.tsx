@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components/macro';
+import styled, { css } from "styled-components/macro";
 
 export const InputBlock = styled.div`
   display: flex;
@@ -20,7 +20,7 @@ export const StyledInput = styled.input<{ $icon?: string }>`
   ${({ $icon }) =>
     $icon &&
     css`
-      background: url('./icons/${$icon}.svg') #ffffff 2.5% center no-repeat;
+      background: url("./icons/${$icon}.svg") #ffffff 2.5% center no-repeat;
     `}
 `;
 

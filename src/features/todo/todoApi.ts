@@ -1,5 +1,5 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { getToken } from '../../api/tokenHelper';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { getToken } from "../../api/tokenHelper";
 
 export interface ITodo {
   id: number;
@@ -9,53 +9,53 @@ export interface ITodo {
 }
 
 export const todoApi = createApi({
-  reducerPath: 'todoApi',
+  reducerPath: "todoApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:4000/',
+    baseUrl: "http://localhost:4000/",
     prepareHeaders: (headers) => {
       const token = getToken();
-      if (token) headers.set('authorization', token);
+      if (token) headers.set("authorization", token);
 
       return headers;
     },
   }),
-  tagTypes: ['Todos'],
+  tagTypes: ["Todos"],
   endpoints: (builder) => ({
     getAll: builder.query<ITodo[], void>({
-      query: () => 'todos',
-      providesTags: [{ type: 'Todos', id: 'LIST' }],
+      query: () => "todos",
+      providesTags: [{ type: "Todos", id: "LIST" }],
     }),
     addTodo: builder.mutation<string, string>({
       query(text) {
         return {
-          url: 'todos',
-          method: 'POST',
+          url: "todos",
+          method: "POST",
           body: {
             text,
           },
         };
       },
-      invalidatesTags: [{ type: 'Todos', id: 'LIST' }],
+      invalidatesTags: [{ type: "Todos", id: "LIST" }],
     }),
     updateTodo: builder.mutation<ITodo, ITodo>({
       query(todo) {
         return {
           url: `todos/${todo.id}`,
-          method: 'PUT',
+          method: "PUT",
           body: todo,
         };
       },
-      invalidatesTags: [{ type: 'Todos', id: 'LIST' }],
+      invalidatesTags: [{ type: "Todos", id: "LIST" }],
     }),
     deleteTodo: builder.mutation<ITodo, ITodo>({
       query(todo) {
         return {
           url: `todos/${todo.id}`,
-          method: 'DELETE',
+          method: "DELETE",
           body: todo,
         };
       },
-      invalidatesTags: [{ type: 'Todos', id: 'LIST' }],
+      invalidatesTags: [{ type: "Todos", id: "LIST" }],
     }),
   }),
 });
