@@ -35,3 +35,9 @@ export interface IProductDetail extends IProductBase {
   tags: string[];
   updated_at: string;
 }
+
+export interface IProductInCart
+  extends Pick<IProductBase, '_id' | 'discount' | 'pictures' | 'name' | 'price' | 'stock' | 'wight'> {
+  value: number;
+  realPrice: number;
+}

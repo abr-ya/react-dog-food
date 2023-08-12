@@ -15,6 +15,7 @@ export const ImageWrapper = styled.div`
   justify-content: center;
   width: 100%;
   height: 187px;
+  overflow: hidden;
 
   & > img {
     height: 100%;

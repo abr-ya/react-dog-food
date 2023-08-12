@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider, Route, createRoutesFromElements } 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MainLayout from '../layout/MainLayout';
-import { Food, Home, Error404, Product, SearchPage, Todo, User, Register } from '../pages';
+import { Cart, Home, Error404, Product, SearchPage, Todo, User, Register } from '../pages';
 import PrivateRoute from '../layout/PrivateRoute';
 import './styles.css';
 
@@ -15,7 +15,7 @@ const router = createBrowserRouter(
       </Route>
       <Route path='/user' element={<User />} />
       <Route path='/user/new' element={<Register />} />
-      <Route path='/product' element={<Food />} />
+      <Route path='/cart' element={<Cart />} />
       <Route path='/todo' element={<Todo />} />
       <Route path='/product/:id' element={<Product />} />
       <Route path='*' element={<Error404 />} />

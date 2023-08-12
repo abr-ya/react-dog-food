@@ -4,10 +4,25 @@ import { CardsWrapper } from '../components/Common.styled';
 import { productApi } from '../api/apiQuery';
 import { LoadMore } from '../components/LoadMore/LoadMore';
 import { useSearchParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../hooks/typedRedux';
+import { addToCart, updateCartItem } from '../features/products/cartSlice';
 
 const SearchPage = () => {
+  const { data: cartData } = useAppSelector((state) => state.cart);
   const [sParams] = useSearchParams();
+
+  const dispatch = useAppDispatch();
   const [page, setPage] = useState(1);
+
+  const getCartCount = (id: string) => {
+    const item = cartData.find((el) => el._id === id);
+
+    return item?.value || 0;
+  };
+
+  const updateHandler = (id: string, value: number) => {
+    dispatch(updateCartItem({ id, value }));
+  };
 
   const query = sParams.get('q') || '';
   const { data, isFetching } = productApi.useGetAllQuery({ query, page, limit: 12 });
@@ -31,7 +46,13 @@ const SearchPage = () => {
       ) : (
         <CardsWrapper>
           {products.map((el) => (
-            <Card key={el._id} {...el} />
+            <Card
+              key={el._id}
+              {...el}
+              toCart={() => dispatch(addToCart(el))}
+              nowInCart={getCartCount(el._id)}
+              upCart={(val: number) => updateHandler(el._id, val)}
+            />
           ))}
           {data && <LoadMore isLoading={isFetching} action={loadMore} isEndOfList={isEndOfList} />}
         </CardsWrapper>
