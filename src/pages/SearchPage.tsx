@@ -1,35 +1,39 @@
-import { useContext, useEffect, useState } from 'react';
-import { IProduct } from '../interfaces';
-import FilterContext from '../context/FilterContext';
+import { useCallback, useState } from 'react';
 import { Card, Loader, NotFound } from '../components';
 import { CardsWrapper } from '../components/Common.styled';
 import { productApi } from '../api/apiQuery';
+import { LoadMore } from '../components/LoadMore/LoadMore';
+import { useSearchParams } from 'react-router-dom';
 
 const SearchPage = () => {
-  const { key } = useContext(FilterContext);
-  const [filteredData, setFilteredData] = useState<IProduct[]>([]);
+  const [sParams] = useSearchParams();
+  const [page, setPage] = useState(1);
 
-  const { data, isFetching } = productApi.useGetAllQuery();
+  const query = sParams.get('q') || '';
+  const { data, isFetching } = productApi.useGetAllQuery({ query, page, limit: 12 });
 
-  const filterByName = (products: IProduct[], text: string) =>
-    products.filter((item) => item.name.toLowerCase().includes(text));
+  const isEndOfList = data?.products && data?.products.length >= data.total;
 
-  useEffect(() => {
-    if (data && data.total) setFilteredData(key ? filterByName(data.products, key) : data.products);
-  }, [data, key]);
+  const loadMore = useCallback(() => {
+    if (!isEndOfList) setPage((prev) => prev + 1);
+  }, [isEndOfList]);
 
-  if (isFetching) return <Loader />;
+  if (isFetching && !data?.products) return <Loader />;
+
+  const products = data?.products;
+  if (!products || !Array.isArray(products)) return <>нет данных (или не массив)!</>; // todo
 
   return (
     <>
-      <h1>{`По запросу "${key}" найдено ${filteredData.length} товаров:`}</h1>
-      {filteredData.length === 0 ? (
+      <h1>{`По запросу "${query}" найдено ${data.total} товаров:`}</h1>
+      {products.length === 0 ? (
         <NotFound />
       ) : (
         <CardsWrapper>
-          {filteredData.slice(0, 8).map((el) => (
+          {products.map((el) => (
             <Card key={el._id} {...el} />
           ))}
+          {data && <LoadMore isLoading={isFetching} action={loadMore} isEndOfList={isEndOfList} />}
         </CardsWrapper>
       )}
     </>

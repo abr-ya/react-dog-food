@@ -6,7 +6,7 @@ const Home = () => {
     <>
       <h1 className={s.root}>Doog Food Home Page</h1>
       <img className={s.root__image} src={reactImage} alt='React Icon' />
-      <p>Пока что здесь песочница, но скоро будет главная сраница сайта!..</p>
+      <p>Пока что здесь песочница, но скоро будет главная страница сайта!..</p>
     </>
   );
 };

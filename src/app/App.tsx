@@ -3,7 +3,6 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MainLayout from '../layout/MainLayout';
 import { Food, Home, Error404, Product, SearchPage, Todo, User, Register } from '../pages';
-import { FilterProvider } from '../context/FilterContext';
 import PrivateRoute from '../layout/PrivateRoute';
 import './styles.css';
 
@@ -26,9 +25,9 @@ const router = createBrowserRouter(
 
 export const App = () => {
   return (
-    <FilterProvider>
+    <>
       <RouterProvider router={router} />
       <ToastContainer />
-    </FilterProvider>
+    </>
   );
 };
