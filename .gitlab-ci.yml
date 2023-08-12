@@ -1,0 +1,38 @@
+default:
+  image: node:18
+  cache:
+    key:
+      files:
+        - yarn.lock
+    paths:
+      - node_modules
+
+stages:
+  - build
+  - test
+  - deploy
+
+install_dependencies:
+  stage: build
+  script:
+    - yarn
+
+build_job:
+  stage: build
+  script:
+    - yarn build
+  needs:
+    - install_dependencies
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - yarn test:ci
+  needs:
+    - install_dependencies 
+  artifacts:
+    reports:
+      junit: junit.xml
