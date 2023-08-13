@@ -7,11 +7,13 @@ default:
     paths:
       - node_modules
 
+# stages
 stages:
   - build
   - test
   - deploy
 
+# tasks == every task is part of stage
 install_dependencies:
   stage: build
   script:
@@ -22,7 +24,7 @@ build_job:
   script:
     - yarn build
   variables:
-    PUBLIC_URL: https://yacoder.gitlab.io/react-course
+    PUBLIC_URL: https://ya.coder.gitlab.io/react-course
     PUBLIC_PATH: /react-course
   needs:
     - install_dependencies
@@ -40,6 +42,7 @@ test_job:
     reports:
       junit: junit.xml
 
+# reserver task's name
 pages:
   image: alpine:latest
   stage: deploy
