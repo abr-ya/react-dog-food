@@ -21,6 +21,9 @@ build_job:
   stage: build
   script:
     - yarn build
+  variables:
+    PUBLIC_URL: https://yacoder.gitlab.io/react-course
+    PUBLIC_PATH: /react-course
   needs:
     - install_dependencies
   artifacts:
@@ -36,3 +39,14 @@ test_job:
   artifacts:
     reports:
       junit: junit.xml
+
+pages:
+  image: alpine:latest
+  stage: deploy
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - mv dist public
+  artifacts:
+    paths:
+      - public

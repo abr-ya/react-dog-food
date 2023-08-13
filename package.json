@@ -21,7 +21,7 @@
     "cy:run": "cypress run --config-file=\"./cypress/cypress.config.ts\"",
     "cy:open": "cypress open --config-file=\"./cypress/cypress.config.ts\"",
     "prepare": "husky install",
-    "commit": "yarn check && cz"
+    "commit": "yarn fix && cz"
   },
   "devDependencies": {
     "@babel/core": "^7.22.1",

@@ -20,7 +20,9 @@ export const routes = createRoutesFromElements(
     <Route path="*" element={<Error404 />} />
   </Route>,
 );
-const router = createBrowserRouter(routes);
+const router = createBrowserRouter(routes, {
+  basename: process.env.PUBLIC_PATH ? process.env.PUBLIC_PATH : "/",
+});
 
 export const App = () => {
   return (
