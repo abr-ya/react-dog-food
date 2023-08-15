@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro';
+import styled from "styled-components/macro";
 
 export const StyledNumberInput = styled.div`
   display: flex;
@@ -8,16 +8,16 @@ export const StyledNumberInput = styled.div`
   border: 1px solid gainsboro;
   border-radius: 4px; */
 
-  & input[type='number']::-webkit-outer-spin-button,
-  & input[type='number']::-webkit-inner-spin-button {
+  & input[type="number"]::-webkit-outer-spin-button,
+  & input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
-  & input[type='number'] {
+  & input[type="number"] {
     -moz-appearance: textfield;
   }
-  & input[type='number']:hover,
-  & input[type='number']:focus {
+  & input[type="number"]:hover,
+  & input[type="number"]:focus {
     -moz-appearance: number-input;
   }
 

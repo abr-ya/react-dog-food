@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../hooks/typedRedux';
+import { useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../hooks/typedRedux";
 import {
   BodyP1,
   BodyP2,
@@ -10,15 +10,15 @@ import {
   H2ExtraBold,
   H3ExtraBold,
   OldPrice,
-} from '../components/Common.styled';
-import { Loader, NotFound, ReviewForm, NumberInput } from '../components';
-import { Block, GrayBlock, ImgBlock, MainWrapper, Subtitle } from './Product.styled';
-import { Rating, Tag } from '../atoms';
-import { getProduct, setLike, addReview } from '../features/products/productSlice';
-import { ArrowLeftIcon, SmallLikeIcon, SmallRedLikeIcon } from '../components/icons';
-import { writeCorrect } from '../utils';
-import { IReviewFormData } from '../components/ReviewForm/interfaces';
-import { addToCart, updateCartItem } from '../features/products/cartSlice';
+} from "../components/Common.styled";
+import { Loader, NotFound, ReviewForm, NumberInput } from "../components";
+import { Block, GrayBlock, ImgBlock, MainWrapper, Subtitle } from "./Product.styled";
+import { Rating, Tag } from "../atoms";
+import { getProduct, setLike, addReview } from "../features/products/productSlice";
+import { ArrowLeftIcon, SmallLikeIcon, SmallRedLikeIcon } from "../components/icons";
+import { writeCorrect } from "../utils";
+import { IReviewFormData } from "../components/ReviewForm/interfaces";
+import { addToCart, updateCartItem } from "../features/products/cartSlice";
 
 const Product = () => {
   const { id } = useParams();
@@ -48,7 +48,7 @@ const Product = () => {
   const rating = reviews.reduce((acc, el) => acc + el.rating, 0) / reviews.length;
 
   const lorem =
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas perspiciatis corporis ullam ex iste! Voluptatem facere minima amet odio corrupti.';
+    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas perspiciatis corporis ullam ex iste! Voluptatem facere minima amet odio corrupti.";
 
   const likeHandler = () => {
     if (id) dispatch(setLike({ id, like: !hasMyLike }));
@@ -81,15 +81,15 @@ const Product = () => {
       <Subtitle>
         <BodyP2>Артикул: {id}</BodyP2>
         <Rating rating={rating} />
-        <BodyP2 $color='dark'>
-          {reviews.length} {writeCorrect(reviews.length, ['отзыв', 'отзыва', 'отзывов'])}
+        <BodyP2 $color="dark">
+          {reviews.length} {writeCorrect(reviews.length, ["отзыв", "отзыва", "отзывов"])}
         </BodyP2>
       </Subtitle>
       <MainWrapper>
         <ImgBlock>
           {!!discount && (
-            <div className='abs'>
-              <Tag color='red' size='m'>
+            <div className="abs">
+              <Tag color="red" size="m">
                 -{discount}%
               </Tag>
             </div>
@@ -98,7 +98,7 @@ const Product = () => {
             <img src={picture} alt={name} />
           </div>
           <div>
-            <OldPrice>{isSale ? `${price} ₽` : ''}</OldPrice>
+            <OldPrice>{isSale ? `${price} ₽` : ""}</OldPrice>
             <H3ExtraBold $isred={isSale}>{realPrice} ₽</H3ExtraBold>
             {nowInCart ? (
               <NumberInput value={nowInCart} saveHandler={updateHandler} max={stock} />
@@ -109,7 +109,7 @@ const Product = () => {
             )}
             <BtnLink onClick={likeHandler}>
               {hasMyLike ? <SmallRedLikeIcon /> : <SmallLikeIcon />}
-              {hasMyLike ? 'Разлайкать!' : 'В избрранное'}
+              {hasMyLike ? "Разлайкать!" : "В избрранное"}
             </BtnLink>
             <GrayBlock>доставка</GrayBlock>
             <GrayBlock>гарантия</GrayBlock>

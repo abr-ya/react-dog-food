@@ -1,11 +1,11 @@
-import { useCallback, useState } from 'react';
-import { Card, Loader, NotFound } from '../components';
-import { CardsWrapper } from '../components/Common.styled';
-import { productApi } from '../api/apiQuery';
-import { LoadMore } from '../components/LoadMore/LoadMore';
-import { useSearchParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../hooks/typedRedux';
-import { addToCart, updateCartItem } from '../features/products/cartSlice';
+import { useCallback, useState } from "react";
+import { Card, Loader, NotFound } from "../components";
+import { CardsWrapper } from "../components/Common.styled";
+import { productApi } from "../api/apiQuery";
+import { LoadMore } from "../components/LoadMore/LoadMore";
+import { useSearchParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../hooks/typedRedux";
+import { addToCart, updateCartItem } from "../features/products/cartSlice";
 
 const SearchPage = () => {
   const { data: cartData } = useAppSelector((state) => state.cart);
@@ -24,7 +24,7 @@ const SearchPage = () => {
     dispatch(updateCartItem({ id, value }));
   };
 
-  const query = sParams.get('q') || '';
+  const query = sParams.get("q") || "";
   const { data, isFetching } = productApi.useGetAllQuery({ query, page, limit: 12 });
 
   const isEndOfList = data?.products && data?.products.length >= data.total;

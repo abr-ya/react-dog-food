@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900&display=swap");
 
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Nunito', 'Helvetica', sans-serif;
+  font-family: "Nunito", "Helvetica", sans-serif;
 }
 
 * {
@@ -25,5 +25,5 @@ p {
   --red: #f44336;
   --white: #ffffff;
   --green: #01a54e;
-  --font-family: 'Nunito', 'Helvetica', sans-serif;
+  --font-family: "Nunito", "Helvetica", sans-serif;
 }

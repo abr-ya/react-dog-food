@@ -1,6 +1,6 @@
-import { DetailedHTMLProps, HTMLAttributes } from 'react';
-import { BodyP1, BodyS1, Container } from '../components/Common.styled';
-import { InstIcon, TeleIcon, ViberIcon, VkIcon, WhatIcon } from '../components/icons';
+import { DetailedHTMLProps, HTMLAttributes } from "react";
+import { BodyP1, BodyS1, Container } from "../components/Common.styled";
+import { InstIcon, TeleIcon, ViberIcon, VkIcon, WhatIcon } from "../components/icons";
 import {
   CopyWrapper,
   CopyText,
@@ -12,8 +12,8 @@ import {
   RightContacts,
   RightIcons,
   Wrapper,
-} from './Footer.styled';
-import { ReactComponent as LogoIcon } from '../app/images/logo.svg';
+} from "./Footer.styled";
+import { ReactComponent as LogoIcon } from "../app/images/logo.svg";
 
 type FooterProps = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 

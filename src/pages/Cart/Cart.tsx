@@ -1,9 +1,9 @@
-import { toast } from 'react-toastify';
-import { useAppSelector, useAppDispatch } from '../../hooks/typedRedux';
-import { Btn, BodyP1, BodyP2, H1ExtraBold, H3ExtraBold } from '../../components/Common.styled';
-import { ItemsWrapper, StyledCart, Right, Order, Delivery, Block } from './Cart.styled';
-import { updateCartItem, removeFromCart } from '../../features/products/cartSlice';
-import Line from './Line/Line';
+import { toast } from "react-toastify";
+import { useAppSelector, useAppDispatch } from "../../hooks/typedRedux";
+import { Btn, BodyP1, BodyP2, H1ExtraBold, H3ExtraBold } from "../../components/Common.styled";
+import { ItemsWrapper, StyledCart, Right, Order, Delivery, Block } from "./Cart.styled";
+import { updateCartItem, removeFromCart } from "../../features/products/cartSlice";
+import Line from "./Line/Line";
 
 const Cart = () => {
   const { count, data, total, withDiscount } = useAppSelector((state) => state.cart);

@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { getToken } from './tokenHelper';
+import axios from "axios";
+import { getToken } from "./tokenHelper";
 
 axios.interceptors.request.use(
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -16,7 +16,7 @@ axios.interceptors.request.use(
       },
     };
   },
-  (error) => Promise.reject(error)
+  (error) => Promise.reject(error),
 );
 
 axios.interceptors.response.use(
@@ -27,7 +27,7 @@ axios.interceptors.response.use(
     const statusCode = response.status;
     if (statusCode === 260) {
       const message = response.data?.message;
-      if (typeof message === 'string') {
+      if (typeof message === "string") {
         console.log(message);
         // Notification.success(message, { autoClose: 5000 });
       } else {
@@ -47,7 +47,7 @@ axios.interceptors.response.use(
     }
 
     throw err;
-  }
+  },
 );
 
 export default axios;

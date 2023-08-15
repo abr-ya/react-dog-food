@@ -1,5 +1,5 @@
-import './animation.css';
-import { Wrapper, Main, Item } from './Loader.styled';
+import "./animation.css";
+import { Wrapper, Main, Item } from "./Loader.styled";
 
 interface ILoaderItem {
   delay: number;

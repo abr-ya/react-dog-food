@@ -1,6 +1,5 @@
-// eslint-disable-next-line eslint-comments/disable-enable-pair
 /* eslint-disable prettier/prettier */
-import styled, { css } from 'styled-components/macro';
+import styled, { css } from "styled-components/macro";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -27,7 +26,7 @@ export const Item = styled.div<{ $delay: number; $rotate: number }>`
     `}
 
   &:after {
-    content: ' ';
+    content: " ";
     display: block;
     position: absolute;
     top: 3px;

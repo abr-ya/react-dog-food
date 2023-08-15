@@ -1,7 +1,7 @@
-import { ForwardedRef, forwardRef, DetailedHTMLProps, TextareaHTMLAttributes } from 'react';
-import cn from 'classnames';
-import { FieldError } from 'react-hook-form';
-import styles from './Input.module.css';
+import { ForwardedRef, forwardRef, DetailedHTMLProps, TextareaHTMLAttributes } from "react";
+import cn from "classnames";
+import { FieldError } from "react-hook-form";
+import styles from "./Input.module.css";
 
 interface ITextarea extends DetailedHTMLProps<TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement> {
   error?: FieldError;
@@ -20,11 +20,11 @@ export const Textarea = forwardRef(
           {...props}
         />
         {error && (
-          <span role='alert' className={styles.errorMessage}>
+          <span role="alert" className={styles.errorMessage}>
             {error.message}
           </span>
         )}
       </div>
     );
-  }
+  },
 );
